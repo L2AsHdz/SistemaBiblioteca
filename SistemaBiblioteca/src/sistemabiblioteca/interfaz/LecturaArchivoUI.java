@@ -170,11 +170,13 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                             if (listaParametros != null) {
                                 switch (listaParametros.get(0)) {
                                     case "LIBRO":
+                                        
                                         if (CrearLibro.verificarParametros(listaParametros)) {
-                                            mensaje = CrearLibro.crearLibro(listaParametros.get(1), listaParametros.get(2), listaParametros.get(3), Integer.parseInt(listaParametros.get(4)));
+                                            //mensaje = CrearLibro.crearLibro(listaParametros.get(1), listaParametros.get(2), listaParametros.get(3), Integer.parseInt(listaParametros.get(4)));
                                         }else{
                                             mensaje = "Libro no creado por error en parametros";
                                         }
+                                        
                                         txtArea.append(mensaje);
                                         break;
                                         
