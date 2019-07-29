@@ -1,5 +1,7 @@
 package sistemabiblioteca.interfaz;
 
+import CreacionObjetos.CrearLibro;
+import CreacionObjetos.MetodosApoyo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -95,10 +97,12 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
         fileChooser.showOpenDialog(fileChooser);
         this.direccionArchivo = fileChooser.getSelectedFile().getAbsolutePath();
         leerArchivo();//Se ejecuta la lectura del archivo
-
+        
+        
     }//GEN-LAST:event_btnLeerActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        
         txtArea.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -140,6 +144,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
     {
         String mensaje = "";//Variable para devolver un mensaje a la ui
         List<String> listaParametros = new ArrayList<>();//Aqui se almacenaran los parametros de cada objeto
+        listaParametros = null;
         try {
             String parametrosObjeto = "";
             File archivo;
@@ -154,25 +159,41 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                 {
                     lineaTexto = br.readLine();//Se le asigna el texto a la variable
                     if (lineaTexto != null) {//Se verifica si la linea fue nula, para saber si ya acabo el texto
-                        
+                        //Verifica el comando y lo guarda en la primera posicion de la lista
+                        //Antes verifica si ya estaba llena la lista, ejecuta la accion necesaria,
+                        //y luego borra la lista, para empezar otra
                         if (lineaTexto.equals("LIBRO") || lineaTexto.equals("ESTUDIANTE") || lineaTexto.equals("PRESTAMO")) {
-                            Iterator i = listaParametros.iterator();
+                            /*Iterator i = listaParametros.iterator();
                             while (i.hasNext()) {
                                 txtArea.append((String) i.next() + "\n");
+                            }*/
+                            if (listaParametros != null) {
+                                switch (listaParametros.get(0)) {
+                                    case "LIBRO":
+                                        if (CrearLibro.verificarParametros(listaParametros)) {
+                                            mensaje = CrearLibro.crearLibro(listaParametros.get(1), listaParametros.get(2), listaParametros.get(3), Integer.parseInt(listaParametros.get(4)));
+                                        }else{
+                                            mensaje = "Libro no creado por error en parametros";
+                                        }
+                                        txtArea.append(mensaje);
+                                        break;
+                                        
+                                    case "ESTUDIANTE":
+                                        
+                                        break;
+                                        
+                                    case "PRESTAMO":
+                                        
+                                        break;
+                                }
+                                listaParametros.clear();
                             }
-                            
-                            listaParametros.clear();
                             listaParametros.add(lineaTexto);
-                            /*txtArea.append(parametrosObjeto + "\n");
-                            parametrosObjeto = lineaTexto;*/
                         }else{
                             
                             listaParametros.add(lineaTexto);
-                            //parametrosObjeto = parametrosObjeto + lineaTexto;
+                            
                         }
-                        
-                        //mensaje = "soy un mensaje";
-                        
                         
                     } else {
                         break;

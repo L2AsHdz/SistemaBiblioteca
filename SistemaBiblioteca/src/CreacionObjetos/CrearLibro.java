@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import sistemabiblioteca.backend.Libro;
 
 /**
@@ -38,6 +39,16 @@ public class CrearLibro {
         } catch (IOException e) {
             System.out.println("Error de conexion");
         }
+    }
+    
+    public static boolean verificarParametros(List parametros){
+        boolean bandera = true;
+        
+        try
+                
+                
+        
+        return bandera;
     }
     
 }
