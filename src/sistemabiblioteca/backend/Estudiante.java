@@ -1,29 +1,31 @@
 package sistemabiblioteca.backend;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Estudiante {
-    private int carnet;
+public class Estudiante implements Serializable{
+    private String carnet;
     private String Nombre;
     private int codigoCarrera;
-    private String fechaNac;
+    private LocalDate fechaNac;
 
-    public Estudiante(int carnet, String Nombre, int codigoCarrera) {
+    public Estudiante(String carnet, String Nombre, int codigoCarrera) {
         this.carnet = carnet;
         this.Nombre = Nombre;
         this.codigoCarrera = codigoCarrera;
     }
 
-    public Estudiante(int carnet, String Nombre, int codigoCarrera, String fechaNac) {
+    public Estudiante(String carnet, String Nombre, int codigoCarrera, String fechaNac) {
         this.carnet = carnet;
         this.Nombre = Nombre;
         this.codigoCarrera = codigoCarrera;
-        this.fechaNac = fechaNac;
+        this.fechaNac = LocalDate.parse(fechaNac);
     }
 
-    public int getCarnet() {
+    public Estudiante() {
+    }
+
+    public String getCarnet() {
         return carnet;
     }
 
@@ -35,9 +37,23 @@ public class Estudiante {
         return codigoCarrera;
     }
 
+    public LocalDate getFechaNac() {
+        return fechaNac;
+    }
+
     public void setFechaNac(String fechaNac) {
-        Date date = new Date();
-        DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-        this.fechaNac = fecha.format(fechaNac);
+        this.fechaNac = LocalDate.parse(fechaNac);
+    }
+
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public void setCodigoCarrera(int codigoCarrera) {
+        this.codigoCarrera = codigoCarrera;
     }
 }

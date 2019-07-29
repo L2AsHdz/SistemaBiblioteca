@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import sistemabiblioteca.backend.Archivos.FileController;
 import sistemabiblioteca.backend.Core;
+import sistemabiblioteca.backend.Estudiante;
 import sistemabiblioteca.backend.Libro;
 
 public class Interfaz extends javax.swing.JFrame {
     private Libro libro = new Libro();
+    private Estudiante estudiante = new Estudiante();
     private Core core = new Core();
     /**
      * Creates new form Interfaz
@@ -54,7 +56,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnAddEst = new javax.swing.JButton();
         btnCancelarEst = new javax.swing.JButton();
         btnVerListadoE = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        lblErrorE = new javax.swing.JLabel();
         jdAddPrestamo = new javax.swing.JDialog();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -69,6 +71,13 @@ public class Interfaz extends javax.swing.JFrame {
         cbOpcionFiltroL = new javax.swing.JComboBox<>();
         txtFiltroLibro = new javax.swing.JTextField();
         btnFiltrarL = new javax.swing.JButton();
+        jdListEstudiantes = new javax.swing.JDialog();
+        jLabel11 = new javax.swing.JLabel();
+        cbOpcionFiltroE = new javax.swing.JComboBox<>();
+        txtFiltroE = new javax.swing.JTextField();
+        btnFiltroE = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblListEstudiantes = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -212,7 +221,10 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jdAddEstudiante.setSize(new java.awt.Dimension(510, 190));
+        jdAddLibro.getAccessibleContext().setAccessibleParent(this);
+
+        jdAddEstudiante.setModal(true);
+        jdAddEstudiante.setSize(new java.awt.Dimension(525, 190));
 
         jLabel7.setText("Carnet:");
 
@@ -229,14 +241,38 @@ public class Interfaz extends javax.swing.JFrame {
         }
         ftxtCodCarrera.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        try {
+            ftxtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtFechaNac.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         btnAddEst.setText("Agregar");
+        btnAddEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEstActionPerformed(evt);
+            }
+        });
 
         btnCancelarEst.setText("Cancelar");
+        btnCancelarEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEstActionPerformed(evt);
+            }
+        });
 
         btnVerListadoE.setText("Ver Listado");
+        btnVerListadoE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerListadoEActionPerformed(evt);
+            }
+        });
 
-        jLabel11.setText("mensaje");
-        jLabel11.setVisible(false);
+        lblErrorE.setVisible(false);
+        lblErrorE.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblErrorE.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorE.setText("mensaje");
 
         javax.swing.GroupLayout jdAddEstudianteLayout = new javax.swing.GroupLayout(jdAddEstudiante.getContentPane());
         jdAddEstudiante.getContentPane().setLayout(jdAddEstudianteLayout);
@@ -246,7 +282,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(lblErrorE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVerListadoE)
                         .addGap(18, 18, 18)
@@ -293,7 +329,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarEst)
                     .addComponent(btnVerListadoE)
-                    .addComponent(jLabel11))
+                    .addComponent(lblErrorE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -420,6 +456,68 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
+        jdListEstudiantes.setModal(true);
+        jdListEstudiantes.setSize(new java.awt.Dimension(620, 390));
+
+        jLabel11.setText("Filtrar:");
+
+        cbOpcionFiltroE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carnet", "Nombre", "Cod.Carrera" }));
+        cbOpcionFiltroE.setSelectedIndex(-1);
+
+        btnFiltroE.setText("Filtrar");
+
+        tblListEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Carnet", "Nombre", "Cod.Carrera", "Fecha Nacimiento"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblListEstudiantes);
+
+        javax.swing.GroupLayout jdListEstudiantesLayout = new javax.swing.GroupLayout(jdListEstudiantes.getContentPane());
+        jdListEstudiantes.getContentPane().setLayout(jdListEstudiantesLayout);
+        jdListEstudiantesLayout.setHorizontalGroup(
+            jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdListEstudiantesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jdListEstudiantesLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbOpcionFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(txtFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jdListEstudiantesLayout.setVerticalGroup(
+            jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdListEstudiantesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFiltroE)
+                        .addComponent(btnFiltroE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(cbOpcionFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(600, 400));
 
@@ -448,8 +546,9 @@ public class Interfaz extends javax.swing.JFrame {
 
         jMenuBar1.add(menuLibros);
 
-        menuEstudiante.setText("Estuiantes");
+        menuEstudiante.setText("Estudiantes");
 
+        itmAddEstudiante.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         itmAddEstudiante.setText("Ingresar Estudiante");
         itmAddEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -541,7 +640,7 @@ public class Interfaz extends javax.swing.JFrame {
                 libro.setFechaPublicacion(ftxtFechaPublicacion.getText());
             }
             core.crearLibro(libro);
-            mostrarInfo("Libro agregado!!");
+            
             //Limpiar Formulario
             cleanAddBook();
             
@@ -557,8 +656,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnVerListadoLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoLActionPerformed
         //Mostar listado de Libros :v
         core.refrescarTablaLibros(tblListLibros);
-        abrirDialogo(jdListLibros, "Listado de libros");
         jdListLibros.repaint();
+        abrirDialogo(jdListLibros, "Listado de libros");
     }//GEN-LAST:event_btnVerListadoLActionPerformed
 
     private void itmAddCopiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddCopiasActionPerformed
@@ -587,6 +686,50 @@ public class Interfaz extends javax.swing.JFrame {
         txtFiltroLibro.setText("");
     }//GEN-LAST:event_btnFiltrarLActionPerformed
 
+    private void btnAddEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEstActionPerformed
+        boolean validacion = true;
+        if (!isNumeric(txtCarnet.getText())) {
+            validacion = false;
+        }
+        if (txtCarnet.getText().isEmpty() || txtNombre.getText().isEmpty() 
+                || ftxtCodCarrera.getText().isEmpty()) {
+            lblErrorE.setText("*Los primeros 3 campos son obligatorios");
+            lblErrorE.setVisible(true);
+        }
+        if (!ftxtFechaNac.getText().equals("    -  -  ")) {
+            System.out.println("entro a esta madre");
+            if (!isFecha(ftxtFechaNac.getText())) {
+                validacion = false;
+                mostrarError("La fecha no esta en el formato correcto");
+            }
+        }
+        if (validacion) {
+            estudiante.setCarnet(txtCarnet.getText());
+            estudiante.setCodigoCarrera(Integer.parseInt(ftxtCodCarrera.getText()));
+            estudiante.setNombre(txtNombre.getText());
+            if (!ftxtFechaNac.getText().equals("    -  -  ")) {
+                estudiante.setFechaNac(ftxtFechaNac.getText());
+            }
+            core.crearEstudiante(estudiante);
+            
+            //Limpiar Formulario
+            cleanAddStudent();
+        }
+    }//GEN-LAST:event_btnAddEstActionPerformed
+
+    private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
+        cleanAddStudent();
+        this.repaint();
+        jdAddEstudiante.setVisible(false);
+    }//GEN-LAST:event_btnCancelarEstActionPerformed
+
+    private void btnVerListadoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoEActionPerformed
+        //Mostar listado de Libros :v
+        core.refrescarTablaEstudiantes(tblListEstudiantes);
+        jdListEstudiantes.repaint();
+        abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
+    }//GEN-LAST:event_btnVerListadoEActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEst;
@@ -595,9 +738,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarL;
     private javax.swing.JButton btnCancelarP;
     private javax.swing.JButton btnFiltrarL;
+    private javax.swing.JButton btnFiltroE;
     private javax.swing.JButton btnPrestar;
     private javax.swing.JButton btnVerListadoE;
     private javax.swing.JButton btnVerListadoL;
+    private javax.swing.JComboBox<String> cbOpcionFiltroE;
     private javax.swing.JComboBox<String> cbOpcionFiltroL;
     private javax.swing.JFormattedTextField ftxtCodCarrera;
     private javax.swing.JFormattedTextField ftxtCodPrestamo;
@@ -627,21 +772,26 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jdAddEstudiante;
     private javax.swing.JDialog jdAddLibro;
     private javax.swing.JDialog jdAddPrestamo;
+    private javax.swing.JDialog jdListEstudiantes;
     private javax.swing.JDialog jdListLibros;
+    private javax.swing.JLabel lblErrorE;
     private javax.swing.JLabel lblErrorL;
     private javax.swing.JMenu menuEstudiante;
     private javax.swing.JMenu menuLibros;
     private javax.swing.JMenu menuListados;
     private javax.swing.JMenu menuPrestamos;
     private javax.swing.JMenu menuReportes;
+    private javax.swing.JTable tblListEstudiantes;
     private javax.swing.JTable tblListLibros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtCarnetPrestamo;
     private javax.swing.JTextField txtEditorial;
+    private javax.swing.JTextField txtFiltroE;
     private javax.swing.JTextField txtFiltroLibro;
     private javax.swing.JTextField txtNoCopias;
     private javax.swing.JTextField txtNombre;
@@ -692,6 +842,13 @@ public class Interfaz extends javax.swing.JFrame {
         txtNoCopias.setText("");
         ftxtFechaPublicacion.setText("");
         lblErrorL.setVisible(false);
+    }
+    
+    private void cleanAddStudent(){
+        txtCarnet.setText("");
+        ftxtCodCarrera.setText("");
+        txtNombre.setText("");
+        ftxtFechaNac.setText("");
     }
    
 }

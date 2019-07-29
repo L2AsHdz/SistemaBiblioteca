@@ -13,7 +13,9 @@ public class Core {
 
     private final FileController fc = new FileController();
     private ArrayList<Libro> libros = new ArrayList();
+    private ArrayList<Estudiante> estudiantes = new ArrayList();
     private Libro libro;
+    private Estudiante estudiante;
 
     public Core() {
     }
@@ -25,6 +27,18 @@ public class Core {
             Interfaz.mostrarError("El libro ya esta registrado");
         } else {
             fc.createFile(libro, "libros/" + libro.getCodigo() + ".book");
+            Interfaz.mostrarInfo("Libro agregado!!");
+        }
+    }
+    
+    public void crearEstudiante(Estudiante est) {
+        File file = new File("estudiantes");
+        file.mkdir();
+        if (FileController.verifyFile("estudiantes/" + est.getCarnet()+ ".std")) {
+            Interfaz.mostrarError("El estudiante ya esta registrado");
+        } else {
+            fc.createFile(est, "estudiantes/" + est.getCarnet()+ ".std");
+            Interfaz.mostrarInfo("Estudiante agregado!!");
         }
     }
 
@@ -92,6 +106,32 @@ public class Core {
             }else if (index == 2 && item[1].equals(texto)) {
                 model.addRow(item);
             }
+        }
+        table.setModel(model);
+    }
+    
+    public void refrescarTablaEstudiantes(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        estudiantes.clear();
+        File file = new File("estudiantes/");
+        String[] files = file.list();
+        for (String f : files) {
+            estudiantes.add((Estudiante) fc.readFile("estudiantes/" + f));
+        }
+        Collections.sort(estudiantes, new Comparator<Estudiante>() {
+            @Override
+            public int compare(Estudiante obj1, Estudiante obj2) {
+                return obj1.getCarnet().compareTo(obj2.getCarnet());
+            }
+        });
+        for (Estudiante e : estudiantes) {
+            Object item[] = new Object[4];
+            item[0] = e.getCarnet();
+            item[1] = e.getNombre();
+            item[2] = e.getCodigoCarrera();
+            item[3] = e.getFechaNac();
+            model.addRow(item);
         }
         table.setModel(model);
     }
