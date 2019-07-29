@@ -96,7 +96,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLeerActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        
+        txtArea.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
@@ -138,6 +138,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
         String mensaje = "";//Variable para devolver un mensaje a la ui
         
         try {
+            String parametrosObjeto = "";
             File archivo;
             FileReader lectorArchivo;
             archivo = new File(this.direccionArchivo);//Se crea el objeto del archivo que se va a leer
@@ -151,8 +152,15 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                     lineaTexto = br.readLine();//Se le asigna el texto a la variable
                     if (lineaTexto != null) {//Se verifica si la linea fue nula, para saber si ya acabo el texto
                         
-                        mensaje = "soy un mensaje";
-                        txtArea.append(lineaTexto + "\n");
+                        if (lineaTexto.equals("LIBRO") || lineaTexto.equals("ESTUDIANTE") || lineaTexto.equals("PRESTAMO")) {
+                            txtArea.append(parametrosObjeto + "\n");
+                            parametrosObjeto = lineaTexto;
+                        }else{
+                            parametrosObjeto = parametrosObjeto + lineaTexto;
+                        }
+                        
+                        //mensaje = "soy un mensaje";
+                        
                         
                     } else {
                         break;
