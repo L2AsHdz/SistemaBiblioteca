@@ -42,11 +42,22 @@ public class CrearLibro {
     }
     
     public static boolean verificarParametros(List parametros){
-        boolean bandera = true;
+        boolean bandera = false;
         
-        try
-                
-                
+        try{
+            if (parametros.get(1).toString().contains("TITULO")) {
+                if (parametros.get(2).toString().contains("AUTOR")) {
+                    if (parametros.get(3).toString().contains("CODIGO")) {
+                        if (parametros.get(4).toString().contains("CANTIDAD")) {
+                            
+                            bandera = true;
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            bandera = false;
+        }
         
         return bandera;
     }
