@@ -1,16 +1,17 @@
 package sistemabiblioteca.backend;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Libro {
+public class Libro implements Serializable{
+
+    private static final long serialVersionUID = 767412604112832179L;
     private String titulo;
     private String autor;
     private String codigo;
     private int cantidad;
-    private String fechaPublicacion;
-    private String editorial;
+    private LocalDate fechaPublicacion;
+    private String editorial = "";
 
     public Libro(String titulo, String autor, String codigo, int cantidad) {
         this.titulo = titulo;
@@ -24,8 +25,11 @@ public class Libro {
         this.autor = autor;
         this.codigo = codigo;
         this.cantidad = cantidad;
-        this.fechaPublicacion = fechaPublicacion;
+        this.fechaPublicacion = LocalDate.parse(fechaPublicacion);
         this.editorial = editorial;
+    }
+
+    public Libro() {
     }
 
     public String getTitulo() {
@@ -44,13 +48,35 @@ public class Libro {
         return cantidad;
     }
 
+    public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
     public void setFechaPublicacion(String fechaPublicacion) {
-        Date date = new Date();
-        DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-        this.fechaPublicacion = fecha.format(fechaPublicacion);
+        this.fechaPublicacion = LocalDate.parse(fechaPublicacion);
     }
 
     public void setEditorial(String editorial) {
         this.editorial = editorial;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

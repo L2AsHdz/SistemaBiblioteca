@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistemabiblioteca.ui;
 
-/**
- *
- * @author asael
- */
-public class Interfaz extends javax.swing.JFrame {
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import sistemabiblioteca.backend.Archivos.FileController;
+import sistemabiblioteca.backend.Core;
+import sistemabiblioteca.backend.Libro;
 
+public class Interfaz extends javax.swing.JFrame {
+    private Libro libro = new Libro();
+    private Core core = new Core();
     /**
      * Creates new form Interfaz
      */
@@ -43,6 +41,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnAddLibro = new javax.swing.JButton();
         btnVerListadoL = new javax.swing.JButton();
         btnCancelarL = new javax.swing.JButton();
+        lblErrorL = new javax.swing.JLabel();
         jdAddEstudiante = new javax.swing.JDialog();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -63,7 +62,13 @@ public class Interfaz extends javax.swing.JFrame {
         ftxtCodPrestamo = new javax.swing.JFormattedTextField();
         btnPrestar = new javax.swing.JButton();
         btnCancelarP = new javax.swing.JButton();
-        jDialog4 = new javax.swing.JDialog();
+        jdListLibros = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblListLibros = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        cbOpcionFiltroL = new javax.swing.JComboBox<>();
+        txtFiltroLibro = new javax.swing.JTextField();
+        btnFiltrarL = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -79,7 +84,7 @@ public class Interfaz extends javax.swing.JFrame {
         menuReportes = new javax.swing.JMenu();
 
         jdAddLibro.setModal(true);
-        jdAddLibro.setSize(new java.awt.Dimension(350, 250));
+        jdAddLibro.setSize(new java.awt.Dimension(350, 260));
 
         jLabel1.setText("Codigo:");
 
@@ -108,10 +113,30 @@ public class Interfaz extends javax.swing.JFrame {
         ftxtCodigo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         btnAddLibro.setText("Agregar");
+        btnAddLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLibroActionPerformed(evt);
+            }
+        });
 
         btnVerListadoL.setText("Ver Listado");
+        btnVerListadoL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerListadoLActionPerformed(evt);
+            }
+        });
 
         btnCancelarL.setText("Cancelar");
+        btnCancelarL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarLActionPerformed(evt);
+            }
+        });
+
+        lblErrorL.setVisible(false);
+        lblErrorL.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblErrorL.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorL.setText("mensajeError");
 
         javax.swing.GroupLayout jdAddLibroLayout = new javax.swing.GroupLayout(jdAddLibro.getContentPane());
         jdAddLibro.getContentPane().setLayout(jdAddLibroLayout);
@@ -119,35 +144,37 @@ public class Interfaz extends javax.swing.JFrame {
             jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdAddLibroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jdAddLibroLayout.createSequentialGroup()
-                        .addComponent(btnAddLibro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelarL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnVerListadoL))
-                    .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jdAddLibroLayout.createSequentialGroup()
-                            .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel6))
+                            .addComponent(btnAddLibro)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancelarL)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jdAddLibroLayout.createSequentialGroup()
-                                    .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNoCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtAutor)
-                                .addComponent(txtTitulo)
-                                .addComponent(txtEditorial)))
-                        .addGroup(jdAddLibroLayout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(84, 84, 84)
-                            .addComponent(ftxtFechaPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnVerListadoL))
+                        .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jdAddLibroLayout.createSequentialGroup()
+                                .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jdAddLibroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jdAddLibroLayout.createSequentialGroup()
+                                        .addComponent(ftxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtNoCopias, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtAutor)
+                                    .addComponent(txtTitulo)
+                                    .addComponent(txtEditorial)))
+                            .addGroup(jdAddLibroLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(84, 84, 84)
+                                .addComponent(ftxtFechaPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblErrorL))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         jdAddLibroLayout.setVerticalGroup(
@@ -180,7 +207,9 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(btnVerListadoL)
                     .addComponent(btnAddLibro)
                     .addComponent(btnCancelarL))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorL)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jdAddEstudiante.setSize(new java.awt.Dimension(510, 190));
@@ -324,15 +353,71 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
-        jDialog4.getContentPane().setLayout(jDialog4Layout);
-        jDialog4Layout.setHorizontalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jdListLibros.setModal(true);
+        jdListLibros.setSize(new java.awt.Dimension(650, 340));
+
+        tblListLibros.setAutoCreateRowSorter(true);
+        tblListLibros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Autor", "Titulo", "No. Copias", "Fecha publicacion", "Editorial"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblListLibros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane1.setViewportView(tblListLibros);
+
+        jLabel14.setText("Filtrar por:");
+
+        cbOpcionFiltroL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Titulo", "Autor" }));
+        cbOpcionFiltroL.setSelectedIndex(-1);
+
+        btnFiltrarL.setText("Filtrar");
+        btnFiltrarL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarLActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jdListLibrosLayout = new javax.swing.GroupLayout(jdListLibros.getContentPane());
+        jdListLibros.getContentPane().setLayout(jdListLibrosLayout);
+        jdListLibrosLayout.setHorizontalGroup(
+            jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdListLibrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jdListLibrosLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbOpcionFiltroL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFiltroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFiltrarL)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
-        jDialog4Layout.setVerticalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jdListLibrosLayout.setVerticalGroup(
+            jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdListLibrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(cbOpcionFiltroL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFiltroLibro)
+                    .addComponent(btnFiltrarL))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -340,6 +425,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         menuLibros.setText("Libros");
 
+        itmAddLibros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         itmAddLibros.setText("Ingresar Libro");
         itmAddLibros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,7 +434,13 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuLibros.add(itmAddLibros);
 
+        itmAddCopias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         itmAddCopias.setText("Añadir Copias");
+        itmAddCopias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmAddCopiasActionPerformed(evt);
+            }
+        });
         menuLibros.add(itmAddCopias);
 
         itmVerListLibros.setText("Ver Listado");
@@ -420,6 +512,81 @@ public class Interfaz extends javax.swing.JFrame {
         abrirDialogo(jdAddPrestamo, "Nuevo Prestamo");
     }//GEN-LAST:event_itmAddPrestamoActionPerformed
 
+    private void btnAddLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLibroActionPerformed
+        boolean validacion = true;
+        if (!isNumeric(txtNoCopias.getText())) {
+            validacion = false;
+        }
+        if (ftxtCodigo.getText().isEmpty() || txtAutor.getText().isEmpty() 
+        || txtTitulo.getText().isEmpty() || ftxtCodCarrera.getText().isEmpty()) {
+            validacion = false;
+            lblErrorL.setText("*Los primero 4 campos son obligatorios");
+            lblErrorL.setVisible(true);
+        }
+        if (!ftxtFechaPublicacion.getText().equals("    -  -  ")) {
+            System.out.println("entro a esta madre");
+            if (!isFecha(ftxtFechaPublicacion.getText())) {
+                validacion = false;
+                mostrarError("La fecha no esta en el formato correcto");
+            }
+        }
+        if (validacion) {
+            libro.setAutor(txtAutor.getText());
+            libro.setCantidad(Integer.parseInt(txtNoCopias.getText()));
+            libro.setCodigo(ftxtCodigo.getText());
+            libro.setTitulo(txtTitulo.getText());
+            if (!txtEditorial.getText().equals("")) {
+                libro.setEditorial(txtEditorial.getText());
+            }if (!ftxtFechaPublicacion.getText().equals("    -  -  ")) {
+                libro.setFechaPublicacion(ftxtFechaPublicacion.getText());
+            }
+            core.crearLibro(libro);
+            mostrarInfo("Libro agregado!!");
+            //Limpiar Formulario
+            cleanAddBook();
+            
+        }
+    }//GEN-LAST:event_btnAddLibroActionPerformed
+
+    private void btnCancelarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarLActionPerformed
+        cleanAddBook();
+        this.repaint();
+        jdAddLibro.setVisible(false);
+    }//GEN-LAST:event_btnCancelarLActionPerformed
+
+    private void btnVerListadoLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoLActionPerformed
+        //Mostar listado de Libros :v
+        core.refrescarTablaLibros(tblListLibros);
+        abrirDialogo(jdListLibros, "Listado de libros");
+        jdListLibros.repaint();
+    }//GEN-LAST:event_btnVerListadoLActionPerformed
+
+    private void itmAddCopiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddCopiasActionPerformed
+        String codLibro = JOptionPane.showInputDialog("Digite el codigo del libro");
+        if (FileController.verifyFile("libros/"+codLibro+".book")) {
+            String cantidad = JOptionPane.showInputDialog("Ingrese cantidad de copias del libro");
+            while (!isNumeric(cantidad)) {
+                mostrarError("Debe ingresar un numero");
+                String cant = JOptionPane.showInputDialog("Digite el codigi del libro");
+                cantidad = cant;
+            }
+            if (isNumeric(cantidad)) {
+                core.actualizarNoLibros(Integer.parseInt(cantidad), codLibro);
+            }
+        }else {
+            mostrarError("El libro no existe en el sistema");
+        }
+
+    }//GEN-LAST:event_itmAddCopiasActionPerformed
+
+    private void btnFiltrarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarLActionPerformed
+        core.filtrarListL(cbOpcionFiltroL.getSelectedIndex(), txtFiltroLibro.getText(),
+        tblListLibros);
+        //limpiar formulario
+        cbOpcionFiltroL.setSelectedIndex(-1);
+        txtFiltroLibro.setText("");
+    }//GEN-LAST:event_btnFiltrarLActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEst;
@@ -427,9 +594,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarEst;
     private javax.swing.JButton btnCancelarL;
     private javax.swing.JButton btnCancelarP;
+    private javax.swing.JButton btnFiltrarL;
     private javax.swing.JButton btnPrestar;
     private javax.swing.JButton btnVerListadoE;
     private javax.swing.JButton btnVerListadoL;
+    private javax.swing.JComboBox<String> cbOpcionFiltroL;
     private javax.swing.JFormattedTextField ftxtCodCarrera;
     private javax.swing.JFormattedTextField ftxtCodPrestamo;
     private javax.swing.JFormattedTextField ftxtCodigo;
@@ -442,12 +611,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmDevolucion;
     private javax.swing.JMenuItem itmVerListEst;
     private javax.swing.JMenuItem itmVerListLibros;
-    private javax.swing.JDialog jDialog4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,18 +626,23 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JDialog jdAddEstudiante;
     private javax.swing.JDialog jdAddLibro;
     private javax.swing.JDialog jdAddPrestamo;
+    private javax.swing.JDialog jdListLibros;
+    private javax.swing.JLabel lblErrorL;
     private javax.swing.JMenu menuEstudiante;
     private javax.swing.JMenu menuLibros;
     private javax.swing.JMenu menuListados;
     private javax.swing.JMenu menuPrestamos;
     private javax.swing.JMenu menuReportes;
+    private javax.swing.JTable tblListLibros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtCarnetPrestamo;
     private javax.swing.JTextField txtEditorial;
+    private javax.swing.JTextField txtFiltroLibro;
     private javax.swing.JTextField txtNoCopias;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTitulo;
@@ -479,6 +653,45 @@ public class Interfaz extends javax.swing.JFrame {
         jd.setLocationRelativeTo(null);
         jd.setResizable(false);
         jd.setVisible(true);
+    }
+    
+    private boolean isNumeric(String s){
+        try {
+            int n = Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private boolean isFecha(String f){
+        try {
+            LocalDate fecha = LocalDate.parse(f);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public static void mostrarError(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje, 
+        "Error", JOptionPane.WARNING_MESSAGE);
+    }
+    
+    public static void mostrarInfo(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje, 
+        "Error", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void cleanAddBook(){
+        txtAutor.setText("");
+        txtCarnet.setText("");
+        txtEditorial.setText("");
+        txtTitulo.setText("");
+        ftxtCodigo.setText("");
+        txtNoCopias.setText("");
+        ftxtFechaPublicacion.setText("");
+        lblErrorL.setVisible(false);
     }
    
 }
