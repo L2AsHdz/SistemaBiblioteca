@@ -144,7 +144,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
     {
         String mensaje = "";//Variable para devolver un mensaje a la ui
         List<String> listaParametros = new ArrayList<>();//Aqui se almacenaran los parametros de cada objeto
-        listaParametros = null;
+        
         try {
             String parametrosObjeto = "";
             File archivo;
@@ -163,21 +163,14 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                         //Antes verifica si ya estaba llena la lista, ejecuta la accion necesaria,
                         //y luego borra la lista, para empezar otra
                         if (lineaTexto.equals("LIBRO") || lineaTexto.equals("ESTUDIANTE") || lineaTexto.equals("PRESTAMO")) {
-                            /*Iterator i = listaParametros.iterator();
-                            while (i.hasNext()) {
+                            Iterator i = listaParametros.iterator();
+                            /*while (i.hasNext()) {
                                 txtArea.append((String) i.next() + "\n");
                             }*/
-                            if (listaParametros != null) {
+                            if (!listaParametros.isEmpty()) {
                                 switch (listaParametros.get(0)) {
                                     case "LIBRO":
-                                        
-                                        if (CrearLibro.verificarParametros(listaParametros)) {
-                                            //mensaje = CrearLibro.crearLibro(listaParametros.get(1), listaParametros.get(2), listaParametros.get(3), Integer.parseInt(listaParametros.get(4)));
-                                        }else{
-                                            mensaje = "Libro no creado por error en parametros";
-                                        }
-                                        
-                                        txtArea.append(mensaje);
+                                        txtArea.append(CrearLibro.crearLibro(listaParametros) + "\n");
                                         break;
                                         
                                     case "ESTUDIANTE":
