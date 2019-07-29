@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -136,7 +139,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
     public void leerArchivo()
     {
         String mensaje = "";//Variable para devolver un mensaje a la ui
-        
+        List<String> listaParametros = new ArrayList<>();//Aqui se almacenaran los parametros de cada objeto
         try {
             String parametrosObjeto = "";
             File archivo;
@@ -153,10 +156,19 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                     if (lineaTexto != null) {//Se verifica si la linea fue nula, para saber si ya acabo el texto
                         
                         if (lineaTexto.equals("LIBRO") || lineaTexto.equals("ESTUDIANTE") || lineaTexto.equals("PRESTAMO")) {
-                            txtArea.append(parametrosObjeto + "\n");
-                            parametrosObjeto = lineaTexto;
+                            Iterator i = listaParametros.iterator();
+                            while (i.hasNext()) {
+                                txtArea.append((String) i.next() + "\n");
+                            }
+                            
+                            listaParametros.clear();
+                            listaParametros.add(lineaTexto);
+                            /*txtArea.append(parametrosObjeto + "\n");
+                            parametrosObjeto = lineaTexto;*/
                         }else{
-                            parametrosObjeto = parametrosObjeto + lineaTexto;
+                            
+                            listaParametros.add(lineaTexto);
+                            //parametrosObjeto = parametrosObjeto + lineaTexto;
                         }
                         
                         //mensaje = "soy un mensaje";
