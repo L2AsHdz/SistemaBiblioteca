@@ -43,7 +43,7 @@ public class CrearLibro {
                     mensaje = "El codigo del libro " + titulo + " es incorrecto o ya existe, o la cantidad es incorrecta";
                 }
                 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 mensaje = "Cantidad de existencia del libro incorrecta";
             }
             
