@@ -46,7 +46,7 @@ public class CrearEstudiante {
                 }
                 
             }catch(NumberFormatException e){
-                mensaje = "Carnet o carrera en formato incorrecto";
+                mensaje = "Estudiante no creado, carnet o carrera en formato incorrecto ";
             }
             
         }else{

@@ -35,18 +35,25 @@ public class CrearLibro {
             try {
                 int cantidad = Integer.parseInt(parametroCantidad[1]);
                 
-                if (cantidad >= 0 && verificarFormatoCodigo(codigo) && !MetodosApoyo.verificarExistenciaArchivo(codigo, "Libro")) {
-                    Libro libro = new Libro(titulo, autor, codigo, cantidad);//Crea el objeto
-                    persistirLibro(libro);//Crea el archivo binario con el libro
-                    mensaje = "El libro " + titulo + " ha sido agregado exitosamente.";
-                }else{
-                    mensaje = "El codigo del libro " + titulo + " es incorrecto o ya existe, o la cantidad es incorrecta";
+                if (cantidad >= 0) {
+                    if (verificarFormatoCodigo(codigo)) {
+                        if (!MetodosApoyo.verificarExistenciaArchivo(codigo, "Libro")) {
+                            Libro libro = new Libro(titulo, autor, codigo, cantidad);//Crea el objeto
+                            persistirLibro(libro);//Crea el archivo binario con el libro
+                            mensaje = "El libro " + titulo + " ha sido agregado exitosamente.";
+                        }else{
+                            mensaje = "Error, el codigo de libro " + codigo + " ya existe";
+                        }
+                    }else{
+                        mensaje = "Error, codigo de libro " + codigo + " en formato incorrecto";
+                    }
+                } else {
+                    mensaje = "Error, cantidad de libros " + titulo + " incorrecta";
                 }
                 
             } catch (NumberFormatException e) {
                 mensaje = "Cantidad de existencia del libro incorrecta";
             }
-            
         }else{
             mensaje = "Libro no creado, error en los parametros";
         }

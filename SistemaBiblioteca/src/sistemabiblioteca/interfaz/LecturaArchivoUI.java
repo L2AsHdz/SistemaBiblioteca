@@ -1,5 +1,6 @@
 package sistemabiblioteca.interfaz;
 
+import CreacionObjetos.CrearEstudiante;
 import CreacionObjetos.CrearLibro;
 import CreacionObjetos.MetodosApoyo;
 import java.io.BufferedReader;
@@ -174,7 +175,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                                         break;
                                         
                                     case "ESTUDIANTE":
-                                        
+                                        txtArea.append(CrearEstudiante.crearEstudiante(listaParametros) + "\n");
                                         break;
                                         
                                     case "PRESTAMO":
