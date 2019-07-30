@@ -2,6 +2,7 @@ package sistemabiblioteca.interfaz;
 
 import CreacionObjetos.CrearEstudiante;
 import CreacionObjetos.CrearLibro;
+import CreacionObjetos.CrearPrestamo;
 import CreacionObjetos.MetodosApoyo;
 import java.io.BufferedReader;
 import java.io.File;
@@ -179,7 +180,7 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
                                         break;
                                         
                                     case "PRESTAMO":
-                                        
+                                        txtArea.append(CrearPrestamo.crearPrestamo(listaParametros) + "\n");
                                         break;
                                 }
                                 listaParametros.clear();
