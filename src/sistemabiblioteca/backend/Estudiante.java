@@ -18,13 +18,6 @@ public class Estudiante implements Serializable{
         this.codigoCarrera = codigoCarrera;
     }
 
-    public Estudiante(String carnet, String Nombre, int codigoCarrera, String fechaNac) {
-        this.carnet = carnet;
-        this.Nombre = Nombre;
-        this.codigoCarrera = codigoCarrera;
-        this.fechaNac = LocalDate.parse(fechaNac);
-    }
-
     public Estudiante() {
     }
 

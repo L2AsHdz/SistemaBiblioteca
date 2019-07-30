@@ -8,8 +8,8 @@ import sistemabiblioteca.backend.Estudiante;
 import sistemabiblioteca.backend.Libro;
 
 public class Interfaz extends javax.swing.JFrame {
-    private Libro libro = new Libro();
-    private Estudiante estudiante = new Estudiante();
+    private Libro libro;
+    private Estudiante estudiante;
     private Core core = new Core();
     /**
      * Creates new form Interfaz
@@ -51,12 +51,12 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtCarnet = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        ftxtCodCarrera = new javax.swing.JFormattedTextField();
         ftxtFechaNac = new javax.swing.JFormattedTextField();
         btnAddEst = new javax.swing.JButton();
         btnCancelarEst = new javax.swing.JButton();
         btnVerListadoE = new javax.swing.JButton();
         lblErrorE = new javax.swing.JLabel();
+        txtCodCarrera = new javax.swing.JTextField();
         jdAddPrestamo = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         btnPrestar = new javax.swing.JButton();
@@ -82,6 +82,16 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblListEstudiantes = new javax.swing.JTable();
         btnCleanFlitroE = new javax.swing.JButton();
+        jdDevolucion = new javax.swing.JDialog();
+        jLabel15 = new javax.swing.JLabel();
+        txtCarnetDev = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        btnFinalizar = new javax.swing.JButton();
+        lblErrorDev = new javax.swing.JLabel();
+        ftxtCodigoDev = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -93,7 +103,6 @@ public class Interfaz extends javax.swing.JFrame {
         menuPrestamos = new javax.swing.JMenu();
         itmAddPrestamo = new javax.swing.JMenuItem();
         itmDevolucion = new javax.swing.JMenuItem();
-        menuListados = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
 
         jdAddLibro.setModal(true);
@@ -239,13 +248,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel10.setText("Fecha Nacimiento:");
 
         try {
-            ftxtCodCarrera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        ftxtCodCarrera.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        try {
             ftxtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
@@ -284,30 +286,30 @@ public class Interfaz extends javax.swing.JFrame {
             jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdAddEstudianteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdAddEstudianteLayout.createSequentialGroup()
+                .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jdAddEstudianteLayout.createSequentialGroup()
+                        .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(31, 31, 31)
+                        .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ftxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jdAddEstudianteLayout.createSequentialGroup()
+                                .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jdAddEstudianteLayout.createSequentialGroup()
                             .addComponent(btnAddEst)
                             .addGap(18, 18, 18)
                             .addComponent(btnCancelarEst)
                             .addGap(18, 18, 18)
                             .addComponent(btnVerListadoE))
-                        .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                            .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel10))
-                            .addGap(31, 31, 31)
-                            .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ftxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(ftxtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtNombre))))
-                    .addComponent(lblErrorE))
+                        .addComponent(lblErrorE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jdAddEstudianteLayout.setVerticalGroup(
@@ -318,7 +320,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(ftxtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -338,10 +340,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
 
         jdAddPrestamo.setModal(true);
-        jdAddPrestamo.setUndecorated(true);
-        jdAddPrestamo.setSize(new java.awt.Dimension(280, 150));
-
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jdAddPrestamo.setSize(new java.awt.Dimension(310, 170));
 
         btnPrestar.setText("Prestar");
         btnPrestar.addActionListener(new java.awt.event.ActionListener() {
@@ -393,7 +392,7 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(17, 17, 17)
                         .addComponent(btnCancelarP)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +411,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(btnCancelarP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrorP)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jdAddPrestamoLayout = new javax.swing.GroupLayout(jdAddPrestamo.getContentPane());
@@ -582,6 +581,88 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
+        jdDevolucion.setPreferredSize(new java.awt.Dimension(450, 150));
+        jdDevolucion.setSize(new java.awt.Dimension(450, 160));
+
+        jLabel15.setText("Carnet del estudiante:");
+
+        jLabel16.setText("Codigo del libro:");
+
+        btnBuscar.setText("Buscar Prestamo");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Total a cancelar;");
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel18.setText("TOTAL");
+
+        btnFinalizar.setText("Finalizar Prestamo");
+        btnFinalizar.setEnabled(false);
+
+        lblErrorDev.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblErrorDev.setVisible(false);
+        lblErrorDev.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorDev.setText("mensaje");
+
+        try {
+            ftxtCodigoDev.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-AAA")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        ftxtCodigoDev.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        javax.swing.GroupLayout jdDevolucionLayout = new javax.swing.GroupLayout(jdDevolucion.getContentPane());
+        jdDevolucion.getContentPane().setLayout(jdDevolucionLayout);
+        jdDevolucionLayout.setHorizontalGroup(
+            jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdDevolucionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdDevolucionLayout.createSequentialGroup()
+                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCarnetDev)
+                            .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFinalizar)))
+                    .addGroup(jdDevolucionLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel18))
+                    .addComponent(lblErrorDev))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jdDevolucionLayout.setVerticalGroup(
+            jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdDevolucionLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtCarnetDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(btnFinalizar)
+                    .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorDev)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(600, 400));
 
@@ -638,12 +719,14 @@ public class Interfaz extends javax.swing.JFrame {
         menuPrestamos.add(itmAddPrestamo);
 
         itmDevolucion.setText("Devolucion");
+        itmDevolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmDevolucionActionPerformed(evt);
+            }
+        });
         menuPrestamos.add(itmDevolucion);
 
         jMenuBar1.add(menuPrestamos);
-
-        menuListados.setText("Listados");
-        jMenuBar1.add(menuListados);
 
         menuReportes.setText("Reportes");
         jMenuBar1.add(menuReportes);
@@ -688,7 +771,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         //Verifica que los campos obligatorios no esten vacios
         if (ftxtCodigo.getText().isEmpty() || txtAutor.getText().isEmpty() 
-        || txtTitulo.getText().isEmpty() || ftxtCodCarrera.getText().isEmpty()) {
+        || txtTitulo.getText().isEmpty() || txtNoCopias.getText().isEmpty()) {
             validacion = false;
             lblErrorL.setText("*Los primero 4 campos son obligatorios");
             lblErrorL.setVisible(true);
@@ -702,6 +785,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
         if (validacion) {
+            libro = new Libro();
             libro.setAutor(txtAutor.getText());
             libro.setCantidad(Integer.parseInt(txtNoCopias.getText()));
             libro.setCodigo(ftxtCodigo.getText());
@@ -730,6 +814,7 @@ public class Interfaz extends javax.swing.JFrame {
         core.refrescarTablaLibros(tblListLibros);
         jdListLibros.repaint();
         abrirDialogo(jdListLibros, "Listado de libros");
+        cbOpcionFiltroL.requestFocus();
     }//GEN-LAST:event_btnVerListadoLActionPerformed
 
     private void itmAddCopiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddCopiasActionPerformed
@@ -749,8 +834,10 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_itmAddCopiasActionPerformed
 
     private void btnFiltrarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarLActionPerformed
-        core.filtrarListL(cbOpcionFiltroL.getSelectedIndex(), txtFiltroLibro.getText(),
-        tblListLibros);
+        if (cbOpcionFiltroL.getSelectedIndex() != -1 && !txtFiltroLibro.getText().isEmpty()) {
+            core.filtrarListL(cbOpcionFiltroL.getSelectedIndex(), txtFiltroLibro.getText(),
+            tblListLibros);
+        }
         //limpiar formulario
         cbOpcionFiltroL.setSelectedIndex(-1);
         txtFiltroLibro.setText("");
@@ -762,8 +849,13 @@ public class Interfaz extends javax.swing.JFrame {
             validacion = false;
             labelError(lblErrorE, "*Formato de carnet incorrecto");
         }
+        int num = Integer.parseInt(txtCodCarrera.getText());
+        if (!isNumeric(txtCodCarrera.getText()) || num <= 0 || num >= 6) {
+            validacion = false;
+            labelError(lblErrorE, "El codigo de carrera no existe");
+        }
         if (txtCarnet.getText().isEmpty() || txtNombre.getText().isEmpty() 
-                || ftxtCodCarrera.getText().isEmpty()) {
+                || txtCodCarrera.getText().isEmpty()) {
             lblErrorE.setText("*Los primeros 3 campos son obligatorios");
             lblErrorE.setVisible(true);
         }
@@ -775,8 +867,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
         if (validacion) {
+            estudiante = new Estudiante();
             estudiante.setCarnet(txtCarnet.getText());
-            estudiante.setCodigoCarrera(Integer.parseInt(ftxtCodCarrera.getText()));
+            estudiante.setCodigoCarrera(Integer.parseInt(txtCodCarrera.getText()));
             estudiante.setNombre(txtNombre.getText());
             if (!ftxtFechaNac.getText().equals("    -  -  ")) {
                 estudiante.setFechaNac(ftxtFechaNac.getText());
@@ -801,10 +894,13 @@ public class Interfaz extends javax.swing.JFrame {
         core.refrescarTablaEstudiantes(tblListEstudiantes);
         jdListEstudiantes.repaint();
         abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
+        cbOpcionFiltroE.requestFocus();
     }//GEN-LAST:event_btnVerListadoEActionPerformed
 
     private void btnFiltroEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroEActionPerformed
-        core.filtrarListE(cbOpcionFiltroE.getSelectedIndex(), txtFiltroE.getText(), tblListEstudiantes);
+        if (cbOpcionFiltroE.getSelectedIndex() != -1 && !txtFiltroE.getText().isEmpty()) {
+            core.filtrarListE(cbOpcionFiltroE.getSelectedIndex(), txtFiltroE.getText(), tblListEstudiantes);
+        }
         //limpiar formulario
         cbOpcionFiltroE.setSelectedIndex(-1);
         txtFiltroE.setText("");
@@ -826,15 +922,15 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
         boolean flag = true;
-        if (!isNumeric(txtCarnetPrestamo.getText()) && !txtCarnetPrestamo.getText().equals("")) {
+        if (!isNumeric(txtCarnetPrestamo.getText())) {
             flag = false;
             labelError(lblErrorP, "*Formato de carnet incorrecto");
         }
-        if (verificarFormatoCodigo(ftxtCodPrestamo1.getText())) {
+        if (!verificarFormatoCodigo(ftxtCodPrestamo1.getText())) {
             flag = false;
             labelError(lblErrorP, "*Formato de codigo erroneo");
         }
-        if (txtCarnetPrestamo.getText().equals("") || ftxtCodPrestamo1.getText().equals("   -   ")) {
+        if (txtCarnetPrestamo.getText().isEmpty() || ftxtCodPrestamo1.getText().equals("   -   ")) {
             flag = false;
             labelError(lblErrorP, "*Ambos datos son obligatorios");
         }
@@ -852,10 +948,34 @@ public class Interfaz extends javax.swing.JFrame {
         jdAddPrestamo.dispose();
     }//GEN-LAST:event_btnCancelarPActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        boolean flag = true;
+        if (!isNumeric(txtCarnetDev.getText())) {
+            flag = false;
+            labelError(lblErrorDev, "Formato de carnet incorrecto");
+        }
+        if (!verificarFormatoCodigo(ftxtCodigoDev.getText())) {
+            flag = false;
+            labelError(lblErrorDev, "Formato de codigo incorrecto");
+        }
+        if (txtCarnetDev.getText().isEmpty() || ftxtCodigoDev.getText().equals("   -   ")) {
+            flag = false;
+            labelError(lblErrorDev, "*Ambos datos son obligatorios");
+        }
+        if (flag) {
+            core.calcularTotal(txtCarnetDev.getText(),ftxtCodigoDev.getText());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void itmDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmDevolucionActionPerformed
+        abrirDialogo(jdDevolucion, "Devolucion");
+    }//GEN-LAST:event_itmDevolucionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEst;
     private javax.swing.JButton btnAddLibro;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarEst;
     private javax.swing.JButton btnCancelarL;
     private javax.swing.JButton btnCancelarP;
@@ -863,14 +983,15 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCleanFlitroE;
     private javax.swing.JButton btnFiltrarL;
     private javax.swing.JButton btnFiltroE;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnPrestar;
     private javax.swing.JButton btnVerListadoE;
     private javax.swing.JButton btnVerListadoL;
     private javax.swing.JComboBox<String> cbOpcionFiltroE;
     private javax.swing.JComboBox<String> cbOpcionFiltroL;
-    private javax.swing.JFormattedTextField ftxtCodCarrera;
     private javax.swing.JFormattedTextField ftxtCodPrestamo1;
     private javax.swing.JFormattedTextField ftxtCodigo;
+    private javax.swing.JFormattedTextField ftxtCodigoDev;
     private javax.swing.JFormattedTextField ftxtFechaNac;
     private javax.swing.JFormattedTextField ftxtFechaPublicacion;
     private javax.swing.JMenuItem itmAddCopias;
@@ -886,6 +1007,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -901,21 +1026,24 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JDialog jdAddEstudiante;
     private javax.swing.JDialog jdAddLibro;
     private javax.swing.JDialog jdAddPrestamo;
+    private javax.swing.JDialog jdDevolucion;
     private javax.swing.JDialog jdListEstudiantes;
     private javax.swing.JDialog jdListLibros;
+    private javax.swing.JLabel lblErrorDev;
     private javax.swing.JLabel lblErrorE;
     private javax.swing.JLabel lblErrorL;
     private javax.swing.JLabel lblErrorP;
     private javax.swing.JMenu menuEstudiante;
     private javax.swing.JMenu menuLibros;
-    private javax.swing.JMenu menuListados;
     private javax.swing.JMenu menuPrestamos;
     private javax.swing.JMenu menuReportes;
     private javax.swing.JTable tblListEstudiantes;
     private javax.swing.JTable tblListLibros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCarnet;
+    private javax.swing.JTextField txtCarnetDev;
     private javax.swing.JTextField txtCarnetPrestamo;
+    private javax.swing.JTextField txtCodCarrera;
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtFiltroE;
     private javax.swing.JTextField txtFiltroLibro;
@@ -982,7 +1110,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void labelError(javax.swing.JLabel lbl, String msj){
-        lbl.setText("msj");
+        lbl.setText(msj);
         lbl.setVisible(true);
     }
     
@@ -999,7 +1127,7 @@ public class Interfaz extends javax.swing.JFrame {
     
     private void cleanAddStudent(){
         txtCarnet.setText("");
-        ftxtCodCarrera.setText("");
+        txtCodCarrera.setText("");
         txtNombre.setText("");
         ftxtFechaNac.setText("");
         lblErrorE.setVisible(false);

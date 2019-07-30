@@ -20,15 +20,6 @@ public class Libro implements Serializable{
         this.cantidad = cantidad;
     }
 
-    public Libro(String titulo, String autor, String codigo, int cantidad, String fechaPublicacion, String editorial) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.codigo = codigo;
-        this.cantidad = cantidad;
-        this.fechaPublicacion = LocalDate.parse(fechaPublicacion);
-        this.editorial = editorial;
-    }
-
     public Libro() {
     }
 

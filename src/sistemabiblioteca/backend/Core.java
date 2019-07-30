@@ -2,13 +2,13 @@ package sistemabiblioteca.backend;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sistemabiblioteca.backend.Archivos.FileController;
+import sistemabiblioteca.backend.Archivos.MetodosApoyo;
 import sistemabiblioteca.ui.Interfaz;
 
 public class Core {
@@ -62,15 +62,18 @@ public class Core {
                 libro = (Libro) fc.readFile("libros/" + codigo + ".bin");
                 if (estudiante.getLibrosPrestados() < 3) {
                     if (libro.getCantidad() > 0) {
+                        prestamo = new Prestamo();
                         prestamo.setCarnet(estudiante.getCarnet());
                         prestamo.setCodigo(libro.getCodigo());
                         prestamo.setFechaPrestamo(LocalDate.now());
                         prestamo.setFechaLimite(LocalDate.now().plusDays(3));
-                        if (FileController.verifyFile("prestamos/"+carnet + "-" + codigo + "b.in")) {
-                            fc.createFile(prestamo, "prestamos/" +LocalDateTime.now()+ ".bin");
-                        }else {
-                            fc.createFile(prestamo, "prestamos/" +LocalDateTime.now()+ ".bin");
-                        }
+                        fc.createFile(prestamo, "prestamos/" + 
+                        MetodosApoyo.agregarNumeroDistintivo(prestamo.getCodigo(), "prestamos")+".bin");
+                        estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()+1);
+                        libro.setCantidad(libro.getCantidad()-1);
+                        fc.createFile(estudiante, "estudiantes/"+estudiante.getCarnet()+".bin");
+                        fc.createFile(libro, "libros/"+libro.getCodigo()+".bin");
+                        Interfaz.mostrarInfo("Prestamo registrado!!");
                     }else {
                         Interfaz.mostrarError("No hay copias disponibles");
                     }
@@ -225,5 +228,37 @@ public class Core {
             }
         }
         table.setModel(model);
+    }
+    
+    public void calcularTotal(String carnet, String codigo){
+        File file = new File("prestamos");
+        String[] nombres = file.list();
+        ArrayList<String> prestamos = new ArrayList();
+        for (String n : nombres) {
+            if (n.contains(codigo)) {
+                prestamos.add(n);
+            }
+        }
+        if (prestamos.size() == 1) {
+            if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
+                libro = (Libro)fc.readFile("libros/"+codigo+".bin");
+                estudiante = (Estudiante)fc.readFile("estudiantes/"+carnet+".bin");
+                prestamo = (Prestamo)fc.readFile("prestamos/"+prestamos.get(0));
+                prestamo.setFechaEntrega();
+                prestamo.setEstadoMora();
+                prestamo.setTotal();
+                prestamo.setDevuelto(true);
+                
+                estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()-1);
+                libro.setCantidad(libro.getCantidad()+1);
+                Interfaz.mostrarInfo("Total a pagar: " + prestamo.getTotal());
+            }else {
+                Interfaz.mostrarError("El estudiante no esta registrado en el sistema");
+            }
+        }else if (prestamos.size() > 1){
+            
+        }else {
+            
+        }
     }
 }
