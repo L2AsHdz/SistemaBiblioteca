@@ -21,33 +21,48 @@ public class Core {
     }
 
     public void crearLibro(Libro libro) {
+        //Crea el directorio libros en la raiz del proyecto
         File file = new File("libros");
         file.mkdir();
-        if (FileController.verifyFile("libros/" + libro.getCodigo() + ".book")) {
+        
+        //Verifica si el archivo ya existe, si ya existe muestra unmensaje
+        //informandolo. De lo contrario se crea el archivo.
+        if (FileController.verifyFile("libros/" + libro.getCodigo() + ".bin")) {
             Interfaz.mostrarError("El libro ya esta registrado");
         } else {
-            fc.createFile(libro, "libros/" + libro.getCodigo() + ".book");
+            fc.createFile(libro, "libros/" + libro.getCodigo() + ".bin");
             Interfaz.mostrarInfo("Libro agregado!!");
         }
     }
     
     public void crearEstudiante(Estudiante est) {
+        //Crea el directorio estudiantes en la raiz del proyecto
         File file = new File("estudiantes");
         file.mkdir();
-        if (FileController.verifyFile("estudiantes/" + est.getCarnet()+ ".std")) {
+        
+        //Verifica si el archivo ya existe, si ya existe muestra unmensaje
+        //informandolo. De lo contrario se crea el archivo.
+        if (FileController.verifyFile("estudiantes/" + est.getCarnet()+ ".bin")) {
             Interfaz.mostrarError("El estudiante ya esta registrado");
         } else {
-            fc.createFile(est, "estudiantes/" + est.getCarnet()+ ".std");
+            fc.createFile(est, "estudiantes/" + est.getCarnet()+ ".bin");
             Interfaz.mostrarInfo("Estudiante agregado!!");
         }
     }
 
+    //Recibe como parametro la cantidad nueva de libros y el codigo del libro.
+    //Lee el archivo, actualiza la informacion y vuelve a escribirlo.
     public void actualizarNoLibros(int cant, String cod) {
-        libro = (Libro) fc.readFile("libros/" + cod + ".book");
+        libro = (Libro) fc.readFile("libros/" + cod + ".bin");
         libro.setCantidad(cant);
-        fc.createFile(libro, "libros/" + libro.getCodigo() + ".book");
+        fc.createFile(libro, "libros/" + libro.getCodigo() + ".bin");
     }
 
+    //Actualiza la tabla de libros:
+    //limpia la tabla y el ArrayList, se obtiene una lista con los nombres de los
+    //archivos en el directorio especificado. Se cargan los archivos al ArrayList.
+    //Se ordena el ArrayList de menor a mayor usando el codigo del libro.
+    //Se agregan una fila a la tabla por cada objeto en el ArrayList.
     public void refrescarTablaLibros(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -76,6 +91,10 @@ public class Core {
         table.setModel(model);
     }
     
+    //Se reciben 3 parametros: el index que indica que filtrado se esta realizando,
+    //el texto (filtro), y la tabla en la que se mostrara las coincidencias.
+    //Se limpia la tabla y el ArrayList, Se ordena el ArrayList.
+    //Se agrega una fila a la tabla por cada coincidencia que haya con el texto.
     public void filtrarListL(int index, String texto, JTable table){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -110,6 +129,11 @@ public class Core {
         table.setModel(model);
     }
     
+    //Actualiza la tabla de estudiantes:
+    //limpia la tabla y el ArrayList, se obtiene una lista con los nombres de los
+    //archivos en el directorio especificado. Se cargan los archivos al ArrayList.
+    //Se ordena el ArrayList de menor a mayor usando el carnet del estudiante.
+    //Se agregan una fila a la tabla por cada objeto en el ArrayList.
     public void refrescarTablaEstudiantes(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -132,6 +156,38 @@ public class Core {
             item[2] = e.getCodigoCarrera();
             item[3] = e.getFechaNac();
             model.addRow(item);
+        }
+        table.setModel(model);
+    }
+    
+    public void filtrarListE(int index, String texto, JTable table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        estudiantes.clear();
+        File file = new File("estudiantes/");
+        String[] files = file.list();
+        for (String f : files) {
+            estudiantes.add((Estudiante) fc.readFile("estudiantes/" + f));
+        }
+        Collections.sort(estudiantes, new Comparator<Estudiante>() {
+            @Override
+            public int compare(Estudiante obj1, Estudiante obj2) {
+                return obj1.getCarnet().compareTo(obj2.getCarnet());
+            }
+        });
+        for (Estudiante e : estudiantes) {
+            Object item[] = new Object[4];
+            item[0] = e.getCarnet();
+            item[1] = e.getNombre();
+            item[2] = e.getCodigoCarrera();
+            item[3] = e.getFechaNac();
+            if (index == 0 && item[0].equals(texto)) {
+                model.addRow(item);
+            }else if (index == 1 && item[1].equals(texto)) {
+                model.addRow(item);
+            }else if (index == 2 && item[2].toString().equals(texto)) {
+                model.addRow(item);
+            }
         }
         table.setModel(model);
     }

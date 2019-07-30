@@ -9,7 +9,7 @@ public class SistemaBiblioteca {
         Interfaz ui = new Interfaz();
         ui.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ui.setLocationRelativeTo(null);
-        ui.setTitle("Analizador Sintactico");
+        ui.setTitle("Sistema Biblioteca");
         ui.setVisible(true);
     }
     

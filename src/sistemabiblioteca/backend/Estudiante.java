@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Estudiante implements Serializable{
+
+    private static final long serialVersionUID = -6207952018402808180L;
     private String carnet;
     private String Nombre;
     private int codigoCarrera;

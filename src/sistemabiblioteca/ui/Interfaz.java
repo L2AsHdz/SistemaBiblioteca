@@ -71,6 +71,7 @@ public class Interfaz extends javax.swing.JFrame {
         cbOpcionFiltroL = new javax.swing.JComboBox<>();
         txtFiltroLibro = new javax.swing.JTextField();
         btnFiltrarL = new javax.swing.JButton();
+        btnCleanFiltroL = new javax.swing.JButton();
         jdListEstudiantes = new javax.swing.JDialog();
         jLabel11 = new javax.swing.JLabel();
         cbOpcionFiltroE = new javax.swing.JComboBox<>();
@@ -78,6 +79,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnFiltroE = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblListEstudiantes = new javax.swing.JTable();
+        btnCleanFlitroE = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -224,7 +226,7 @@ public class Interfaz extends javax.swing.JFrame {
         jdAddLibro.getAccessibleContext().setAccessibleParent(this);
 
         jdAddEstudiante.setModal(true);
-        jdAddEstudiante.setSize(new java.awt.Dimension(525, 190));
+        jdAddEstudiante.setSize(new java.awt.Dimension(500, 190));
 
         jLabel7.setText("Carnet:");
 
@@ -280,32 +282,31 @@ public class Interfaz extends javax.swing.JFrame {
             jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdAddEstudianteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                        .addComponent(lblErrorE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVerListadoE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelarEst))
-                    .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                        .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10))
-                        .addGap(31, 31, 31)
-                        .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jdAddEstudianteLayout.createSequentialGroup()
+                .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdAddEstudianteLayout.createSequentialGroup()
+                            .addComponent(btnAddEst)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCancelarEst)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnVerListadoE))
+                        .addGroup(jdAddEstudianteLayout.createSequentialGroup()
+                            .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel10))
+                            .addGap(31, 31, 31)
+                            .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(ftxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddEst))
-                            .addGroup(jdAddEstudianteLayout.createSequentialGroup()
-                                .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ftxtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombre))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                                .addGroup(jdAddEstudianteLayout.createSequentialGroup()
+                                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(ftxtCodCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNombre))))
+                    .addComponent(lblErrorE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jdAddEstudianteLayout.setVerticalGroup(
             jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,14 +324,15 @@ public class Interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(ftxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddEst))
+                    .addComponent(ftxtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jdAddEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddEst)
                     .addComponent(btnCancelarEst)
-                    .addComponent(btnVerListadoE)
-                    .addComponent(lblErrorE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(btnVerListadoE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jdAddPrestamo.setSize(new java.awt.Dimension(300, 150));
@@ -392,7 +394,6 @@ public class Interfaz extends javax.swing.JFrame {
         jdListLibros.setModal(true);
         jdListLibros.setSize(new java.awt.Dimension(650, 340));
 
-        tblListLibros.setAutoCreateRowSorter(true);
         tblListLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -424,6 +425,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnCleanFiltroL.setText("Limpiar Filtro");
+        btnCleanFiltroL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanFiltroLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jdListLibrosLayout = new javax.swing.GroupLayout(jdListLibros.getContentPane());
         jdListLibros.getContentPane().setLayout(jdListLibrosLayout);
         jdListLibrosLayout.setHorizontalGroup(
@@ -439,18 +447,22 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtFiltroLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnFiltrarL)))
+                        .addComponent(btnFiltrarL)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCleanFiltroL)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jdListLibrosLayout.setVerticalGroup(
             jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdListLibrosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(cbOpcionFiltroL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFiltroLibro)
-                    .addComponent(btnFiltrarL))
+                .addGroup(jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFiltroLibro, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jdListLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(cbOpcionFiltroL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFiltrarL)
+                        .addComponent(btnCleanFiltroL)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -465,6 +477,11 @@ public class Interfaz extends javax.swing.JFrame {
         cbOpcionFiltroE.setSelectedIndex(-1);
 
         btnFiltroE.setText("Filtrar");
+        btnFiltroE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroEActionPerformed(evt);
+            }
+        });
 
         tblListEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -484,6 +501,13 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblListEstudiantes);
 
+        btnCleanFlitroE.setText("Limpiar Filtro");
+        btnCleanFlitroE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanFlitroEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jdListEstudiantesLayout = new javax.swing.GroupLayout(jdListEstudiantes.getContentPane());
         jdListEstudiantes.getContentPane().setLayout(jdListEstudiantesLayout);
         jdListEstudiantesLayout.setHorizontalGroup(
@@ -499,7 +523,9 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(txtFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCleanFlitroE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jdListEstudiantesLayout.setVerticalGroup(
@@ -509,7 +535,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFiltroE)
-                        .addComponent(btnFiltroE))
+                        .addComponent(btnFiltroE)
+                        .addComponent(btnCleanFlitroE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdListEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(cbOpcionFiltroE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -613,15 +640,18 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnAddLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLibroActionPerformed
         boolean validacion = true;
+        //Verifica que el texto sea un numero
         if (!isNumeric(txtNoCopias.getText())) {
             validacion = false;
         }
+        //Verifica que los campos obligatorios no esten vacios
         if (ftxtCodigo.getText().isEmpty() || txtAutor.getText().isEmpty() 
         || txtTitulo.getText().isEmpty() || ftxtCodCarrera.getText().isEmpty()) {
             validacion = false;
             lblErrorL.setText("*Los primero 4 campos son obligatorios");
             lblErrorL.setVisible(true);
         }
+        //Verifica que la fecha tenga un formato correcto
         if (!ftxtFechaPublicacion.getText().equals("    -  -  ")) {
             System.out.println("entro a esta madre");
             if (!isFecha(ftxtFechaPublicacion.getText())) {
@@ -640,10 +670,9 @@ public class Interfaz extends javax.swing.JFrame {
                 libro.setFechaPublicacion(ftxtFechaPublicacion.getText());
             }
             core.crearLibro(libro);
-            
             //Limpiar Formulario
             cleanAddBook();
-            
+            ftxtCodigo.requestFocus();
         }
     }//GEN-LAST:event_btnAddLibroActionPerformed
 
@@ -651,10 +680,11 @@ public class Interfaz extends javax.swing.JFrame {
         cleanAddBook();
         this.repaint();
         jdAddLibro.setVisible(false);
+        jdAddLibro.dispose();
     }//GEN-LAST:event_btnCancelarLActionPerformed
 
     private void btnVerListadoLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoLActionPerformed
-        //Mostar listado de Libros :v
+        cleanAddBook();
         core.refrescarTablaLibros(tblListLibros);
         jdListLibros.repaint();
         abrirDialogo(jdListLibros, "Listado de libros");
@@ -714,6 +744,7 @@ public class Interfaz extends javax.swing.JFrame {
             
             //Limpiar Formulario
             cleanAddStudent();
+            txtCarnet.requestFocus();
         }
     }//GEN-LAST:event_btnAddEstActionPerformed
 
@@ -721,14 +752,36 @@ public class Interfaz extends javax.swing.JFrame {
         cleanAddStudent();
         this.repaint();
         jdAddEstudiante.setVisible(false);
+        jdAddEstudiante.dispose();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
 
     private void btnVerListadoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoEActionPerformed
-        //Mostar listado de Libros :v
+        cleanAddStudent();
         core.refrescarTablaEstudiantes(tblListEstudiantes);
         jdListEstudiantes.repaint();
         abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
     }//GEN-LAST:event_btnVerListadoEActionPerformed
+
+    private void btnFiltroEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroEActionPerformed
+        core.filtrarListE(cbOpcionFiltroE.getSelectedIndex(), txtFiltroE.getText(), tblListEstudiantes);
+        //limpiar formulario
+        cbOpcionFiltroE.setSelectedIndex(-1);
+        txtFiltroE.setText("");
+    }//GEN-LAST:event_btnFiltroEActionPerformed
+
+    private void btnCleanFlitroEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanFlitroEActionPerformed
+        core.refrescarTablaEstudiantes(tblListEstudiantes);
+        cbOpcionFiltroE.setSelectedIndex(-1);
+        txtFiltroE.setText("");
+        jdAddEstudiante.repaint();
+    }//GEN-LAST:event_btnCleanFlitroEActionPerformed
+
+    private void btnCleanFiltroLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanFiltroLActionPerformed
+        core.refrescarTablaLibros(tblListLibros);
+        cbOpcionFiltroL.setSelectedIndex(-1);
+        txtFiltroLibro.setText("");
+        jdAddLibro.repaint();
+    }//GEN-LAST:event_btnCleanFiltroLActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -737,6 +790,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarEst;
     private javax.swing.JButton btnCancelarL;
     private javax.swing.JButton btnCancelarP;
+    private javax.swing.JButton btnCleanFiltroL;
+    private javax.swing.JButton btnCleanFlitroE;
     private javax.swing.JButton btnFiltrarL;
     private javax.swing.JButton btnFiltroE;
     private javax.swing.JButton btnPrestar;
@@ -830,7 +885,7 @@ public class Interfaz extends javax.swing.JFrame {
     
     public static void mostrarInfo(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje, 
-        "Error", JOptionPane.INFORMATION_MESSAGE);
+        "Informacion", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void cleanAddBook(){
@@ -849,6 +904,7 @@ public class Interfaz extends javax.swing.JFrame {
         ftxtCodCarrera.setText("");
         txtNombre.setText("");
         ftxtFechaNac.setText("");
+        lblErrorE.setVisible(false);
     }
    
 }
