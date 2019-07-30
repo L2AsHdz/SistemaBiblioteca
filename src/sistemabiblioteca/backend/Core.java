@@ -1,6 +1,8 @@
 package sistemabiblioteca.backend;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,6 +18,7 @@ public class Core {
     private ArrayList<Estudiante> estudiantes = new ArrayList();
     private Libro libro;
     private Estudiante estudiante;
+    private Prestamo prestamo = new Prestamo();
 
     public Core() {
     }
@@ -49,12 +52,44 @@ public class Core {
             Interfaz.mostrarInfo("Estudiante agregado!!");
         }
     }
+    
+    public void crearPrestamo(String carnet, String codigo){
+        File file = new File("prestamos");
+        file.mkdir();
+        if (FileController.verifyFile("estudiantes/" + carnet + ".bin")) {
+            if (FileController.verifyFile("libros/" + codigo + ".bin")) {
+                estudiante = (Estudiante) fc.readFile("estudiantes/" + carnet + ".bin");
+                libro = (Libro) fc.readFile("libros/" + codigo + ".bin");
+                if (estudiante.getLibrosPrestados() < 3) {
+                    if (libro.getCantidad() > 0) {
+                        prestamo.setCarnet(estudiante.getCarnet());
+                        prestamo.setCodigo(libro.getCodigo());
+                        prestamo.setFechaPrestamo(LocalDate.now());
+                        prestamo.setFechaLimite(LocalDate.now().plusDays(3));
+                        if (FileController.verifyFile("prestamos/"+carnet + "-" + codigo + "b.in")) {
+                            fc.createFile(prestamo, "prestamos/" +LocalDateTime.now()+ ".bin");
+                        }else {
+                            fc.createFile(prestamo, "prestamos/" +LocalDateTime.now()+ ".bin");
+                        }
+                    }else {
+                        Interfaz.mostrarError("No hay copias disponibles");
+                    }
+                }else {
+                    Interfaz.mostrarError("El estudiante ya tiene prestados 3 libros");
+                }
+            }else {
+                Interfaz.mostrarError("El libro no esta registrado en el sistema");
+            }
+        }else {
+            Interfaz.mostrarError("El estudiante no esta registrado en el sistema");
+        }
+    }
 
     //Recibe como parametro la cantidad nueva de libros y el codigo del libro.
     //Lee el archivo, actualiza la informacion y vuelve a escribirlo.
-    public void actualizarNoLibros(int cant, String cod) {
+    public void agregarCopias(int cant, String cod) {
         libro = (Libro) fc.readFile("libros/" + cod + ".bin");
-        libro.setCantidad(cant);
+        libro.setCantidad(libro.getCantidad()+cant);
         fc.createFile(libro, "libros/" + libro.getCodigo() + ".bin");
     }
 

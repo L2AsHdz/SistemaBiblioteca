@@ -58,12 +58,14 @@ public class Interfaz extends javax.swing.JFrame {
         btnVerListadoE = new javax.swing.JButton();
         lblErrorE = new javax.swing.JLabel();
         jdAddPrestamo = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        btnPrestar = new javax.swing.JButton();
+        btnCancelarP = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtCarnetPrestamo = new javax.swing.JTextField();
-        ftxtCodPrestamo = new javax.swing.JFormattedTextField();
-        btnPrestar = new javax.swing.JButton();
-        btnCancelarP = new javax.swing.JButton();
+        ftxtCodPrestamo1 = new javax.swing.JFormattedTextField();
+        lblErrorP = new javax.swing.JLabel();
         jdListLibros = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListLibros = new javax.swing.JTable();
@@ -335,61 +337,96 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jdAddPrestamo.setSize(new java.awt.Dimension(300, 150));
+        jdAddPrestamo.setModal(true);
+        jdAddPrestamo.setUndecorated(true);
+        jdAddPrestamo.setSize(new java.awt.Dimension(280, 150));
 
-        jLabel12.setText("Codigo del Libro:");
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
+        btnPrestar.setText("Prestar");
+        btnPrestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestarActionPerformed(evt);
+            }
+        });
+
+        btnCancelarP.setText("Cancelar");
+        btnCancelarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarPActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Codigo del Libros:");
 
         jLabel13.setText("Carnet del estudiante:");
 
         try {
-            ftxtCodPrestamo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-AAA")));
+            ftxtCodPrestamo1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-AAA")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ftxtCodPrestamo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ftxtCodPrestamo1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        btnPrestar.setText("Prestar");
+        lblErrorP.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblErrorP.setVisible(false);
+        lblErrorP.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorP.setText("Mensaje");
 
-        btnCancelarP.setText("Cancelar");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblErrorP)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(txtCarnetPrestamo)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnPrestar)
+                            .addComponent(jLabel12))
+                        .addGap(17, 17, 17)
+                        .addComponent(btnCancelarP)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtCarnetPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPrestar)
+                    .addComponent(btnCancelarP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrorP)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jdAddPrestamoLayout = new javax.swing.GroupLayout(jdAddPrestamo.getContentPane());
         jdAddPrestamo.getContentPane().setLayout(jdAddPrestamoLayout);
         jdAddPrestamoLayout.setHorizontalGroup(
             jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdAddPrestamoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jdAddPrestamoLayout.createSequentialGroup()
-                        .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ftxtCodPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(txtCarnetPrestamo)))
-                    .addGroup(jdAddPrestamoLayout.createSequentialGroup()
-                        .addComponent(btnCancelarP)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPrestar)))
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jdAddPrestamoLayout.setVerticalGroup(
             jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdAddPrestamoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtCarnetPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(ftxtCodPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarP)
-                    .addComponent(btnPrestar))
-                .addContainerGap(32, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jdAddPrestamo.getAccessibleContext().setAccessibleParent(this);
 
         jdListLibros.setModal(true);
         jdListLibros.setSize(new java.awt.Dimension(650, 340));
@@ -591,6 +628,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         menuPrestamos.setText("Prestamos");
 
+        itmAddPrestamo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         itmAddPrestamo.setText("Nuevo Prestamo");
         itmAddPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -644,6 +682,10 @@ public class Interfaz extends javax.swing.JFrame {
         if (!isNumeric(txtNoCopias.getText())) {
             validacion = false;
         }
+        if (!verificarFormatoCodigo(ftxtCodigo.getText())) {
+            validacion = false;
+            labelError(lblErrorL, "*Formato de codigo incorrecto");
+        }
         //Verifica que los campos obligatorios no esten vacios
         if (ftxtCodigo.getText().isEmpty() || txtAutor.getText().isEmpty() 
         || txtTitulo.getText().isEmpty() || ftxtCodCarrera.getText().isEmpty()) {
@@ -656,7 +698,7 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("entro a esta madre");
             if (!isFecha(ftxtFechaPublicacion.getText())) {
                 validacion = false;
-                mostrarError("La fecha no esta en el formato correcto");
+                labelError(lblErrorL, "*La fecha no esta en el formato correcto");
             }
         }
         if (validacion) {
@@ -692,16 +734,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void itmAddCopiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddCopiasActionPerformed
         String codLibro = JOptionPane.showInputDialog("Digite el codigo del libro");
-        if (FileController.verifyFile("libros/"+codLibro+".book")) {
-            String cantidad = JOptionPane.showInputDialog("Ingrese cantidad de copias del libro");
+        if (FileController.verifyFile("libros/"+codLibro+".bin")) {
+            String cantidad = JOptionPane.showInputDialog("Ingrese cantidad de copias nuevas");
             while (!isNumeric(cantidad)) {
                 mostrarError("Debe ingresar un numero");
-                String cant = JOptionPane.showInputDialog("Digite el codigi del libro");
+                String cant = JOptionPane.showInputDialog("Ingrese cantidad de copias nuevas");
                 cantidad = cant;
             }
-            if (isNumeric(cantidad)) {
-                core.actualizarNoLibros(Integer.parseInt(cantidad), codLibro);
-            }
+            core.agregarCopias(Integer.parseInt(cantidad), codLibro);
         }else {
             mostrarError("El libro no existe en el sistema");
         }
@@ -720,6 +760,7 @@ public class Interfaz extends javax.swing.JFrame {
         boolean validacion = true;
         if (!isNumeric(txtCarnet.getText())) {
             validacion = false;
+            labelError(lblErrorE, "*Formato de carnet incorrecto");
         }
         if (txtCarnet.getText().isEmpty() || txtNombre.getText().isEmpty() 
                 || ftxtCodCarrera.getText().isEmpty()) {
@@ -730,7 +771,7 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("entro a esta madre");
             if (!isFecha(ftxtFechaNac.getText())) {
                 validacion = false;
-                mostrarError("La fecha no esta en el formato correcto");
+                labelError(lblErrorE, "*La fecha no esta en el formato correcto");
             }
         }
         if (validacion) {
@@ -744,8 +785,8 @@ public class Interfaz extends javax.swing.JFrame {
             
             //Limpiar Formulario
             cleanAddStudent();
-            txtCarnet.requestFocus();
         }
+            txtCarnet.requestFocus();
     }//GEN-LAST:event_btnAddEstActionPerformed
 
     private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
@@ -783,6 +824,34 @@ public class Interfaz extends javax.swing.JFrame {
         jdAddLibro.repaint();
     }//GEN-LAST:event_btnCleanFiltroLActionPerformed
 
+    private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
+        boolean flag = true;
+        if (!isNumeric(txtCarnetPrestamo.getText()) && !txtCarnetPrestamo.getText().equals("")) {
+            flag = false;
+            labelError(lblErrorP, "*Formato de carnet incorrecto");
+        }
+        if (verificarFormatoCodigo(ftxtCodPrestamo1.getText())) {
+            flag = false;
+            labelError(lblErrorP, "*Formato de codigo erroneo");
+        }
+        if (txtCarnetPrestamo.getText().equals("") || ftxtCodPrestamo1.getText().equals("   -   ")) {
+            flag = false;
+            labelError(lblErrorP, "*Ambos datos son obligatorios");
+        }
+        if (flag) {
+            core.crearPrestamo(txtCarnetPrestamo.getText(), ftxtCodPrestamo1.getText());
+            cleanAddPrestamo();
+        }
+        txtCarnetPrestamo.requestFocus();
+    }//GEN-LAST:event_btnPrestarActionPerformed
+
+    private void btnCancelarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPActionPerformed
+        cleanAddPrestamo();
+        this.repaint();
+        jdAddPrestamo.setVisible(false);
+        jdAddPrestamo.dispose();
+    }//GEN-LAST:event_btnCancelarPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEst;
@@ -800,7 +869,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbOpcionFiltroE;
     private javax.swing.JComboBox<String> cbOpcionFiltroL;
     private javax.swing.JFormattedTextField ftxtCodCarrera;
-    private javax.swing.JFormattedTextField ftxtCodPrestamo;
+    private javax.swing.JFormattedTextField ftxtCodPrestamo1;
     private javax.swing.JFormattedTextField ftxtCodigo;
     private javax.swing.JFormattedTextField ftxtFechaNac;
     private javax.swing.JFormattedTextField ftxtFechaPublicacion;
@@ -826,6 +895,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jdAddEstudiante;
@@ -835,6 +905,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JDialog jdListLibros;
     private javax.swing.JLabel lblErrorE;
     private javax.swing.JLabel lblErrorL;
+    private javax.swing.JLabel lblErrorP;
     private javax.swing.JMenu menuEstudiante;
     private javax.swing.JMenu menuLibros;
     private javax.swing.JMenu menuListados;
@@ -878,6 +949,28 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    public static boolean verificarFormatoCodigo(String codigo){
+        boolean bandera = false;
+        
+        String[] seccionesCodigo = codigo.split("-");
+        //Verifica que existan 3 caracteres de cada lado
+        if (seccionesCodigo[0].length() == 3 && seccionesCodigo[1].length() == 3) {
+            
+            try{
+                Integer.parseInt(seccionesCodigo[0]);
+                if (seccionesCodigo[1].equals(seccionesCodigo[1].toUpperCase())) {
+                    bandera = true;
+                }
+            }catch(Exception e){
+                bandera = false;
+            }
+            
+        }else{
+            bandera = false;
+        }
+        return bandera;
+    }
+    
     public static void mostrarError(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje, 
         "Error", JOptionPane.WARNING_MESSAGE);
@@ -886,6 +979,11 @@ public class Interfaz extends javax.swing.JFrame {
     public static void mostrarInfo(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje, 
         "Informacion", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void labelError(javax.swing.JLabel lbl, String msj){
+        lbl.setText("msj");
+        lbl.setVisible(true);
     }
     
     private void cleanAddBook(){
@@ -905,6 +1003,12 @@ public class Interfaz extends javax.swing.JFrame {
         txtNombre.setText("");
         ftxtFechaNac.setText("");
         lblErrorE.setVisible(false);
+    }
+    
+    private void cleanAddPrestamo(){
+        txtCarnetPrestamo.setText("");
+        ftxtCodPrestamo1.setText("");
+        lblErrorP.setVisible(false);
     }
    
 }

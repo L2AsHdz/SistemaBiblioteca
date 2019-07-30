@@ -9,6 +9,7 @@ public class Estudiante implements Serializable{
     private String carnet;
     private String Nombre;
     private int codigoCarrera;
+    private int librosPrestados = 0;
     private LocalDate fechaNac;
 
     public Estudiante(String carnet, String Nombre, int codigoCarrera) {
@@ -25,6 +26,14 @@ public class Estudiante implements Serializable{
     }
 
     public Estudiante() {
+    }
+
+    public int getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public void setLibrosPrestados(int librosPrestados) {
+        this.librosPrestados = librosPrestados;
     }
 
     public String getCarnet() {
