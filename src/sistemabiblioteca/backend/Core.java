@@ -307,7 +307,7 @@ public class Core {
                 model.addRow(item);
             }else if (option == 4 && item[1].toString().equals(carnet)) {
                 model.addRow(item);
-            }else if (option ==5 && item[2].toString().equals(carnet)) {
+            }else if (option ==5 && item[2].toString().equals(carnet) && !p.isDevuelto()) {
                 model.addRow(item);
             }
         }

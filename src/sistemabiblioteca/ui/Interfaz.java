@@ -100,6 +100,7 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblReporte5 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
         itmAddCopias = new javax.swing.JMenuItem();
@@ -755,6 +756,8 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(600, 400));
 
+        jMenu1.setText("Informacion");
+
         menuLibros.setText("Libros");
 
         itmAddLibros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
@@ -778,7 +781,7 @@ public class Interfaz extends javax.swing.JFrame {
         itmVerListLibros.setText("Ver Listado");
         menuLibros.add(itmVerListLibros);
 
-        jMenuBar1.add(menuLibros);
+        jMenu1.add(menuLibros);
 
         menuEstudiante.setText("Estudiantes");
 
@@ -794,7 +797,7 @@ public class Interfaz extends javax.swing.JFrame {
         itmVerListEst.setText("Ver Listado");
         menuEstudiante.add(itmVerListEst);
 
-        jMenuBar1.add(menuEstudiante);
+        jMenu1.add(menuEstudiante);
 
         menuPrestamos.setText("Prestamos");
 
@@ -807,6 +810,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuPrestamos.add(itmAddPrestamo);
 
+        itmDevolucion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         itmDevolucion.setText("Devolucion");
         itmDevolucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -815,10 +819,13 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuPrestamos.add(itmDevolucion);
 
-        jMenuBar1.add(menuPrestamos);
+        jMenu1.add(menuPrestamos);
+
+        jMenuBar1.add(jMenu1);
 
         menuReportes.setText("Reportes");
 
+        itmReporte1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte1.setText("Prestamos a entregarse hoy");
         itmReporte1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -827,6 +834,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuReportes.add(itmReporte1);
 
+        itmReporte2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte2.setText("Prestamos en mora");
         itmReporte2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -835,9 +843,11 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuReportes.add(itmReporte2);
 
+        itmReporte3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte3.setText("Total de dinero recaudado (intervalo de tiempo)");
         menuReportes.add(itmReporte3);
 
+        itmReporte4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte4.setText("Prestamos hechos por un estudiante");
         itmReporte4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -846,6 +856,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuReportes.add(itmReporte4);
 
+        itmReporte5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte5.setText("Libros prestados actualmente a un estudiante");
         itmReporte5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -854,6 +865,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuReportes.add(itmReporte5);
 
+        itmReporte6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_MASK));
         itmReporte6.setText("Prestamos hechos por carrera (intervalo de tiempo)");
         menuReportes.add(itmReporte6);
 
@@ -1208,6 +1220,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
