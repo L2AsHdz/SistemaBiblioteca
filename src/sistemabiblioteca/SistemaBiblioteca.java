@@ -1,5 +1,6 @@
 package sistemabiblioteca;
 
+import sistemabiblioteca.interfaz.LecturaArchivoUI;
 import sistemabiblioteca.ui.Interfaz;
 
 public class SistemaBiblioteca {
@@ -10,6 +11,12 @@ public class SistemaBiblioteca {
         ui.setLocationRelativeTo(null);
         ui.setTitle("Sistema Biblioteca");
         ui.setVisible(true);
+        if (ui.verificarFiles()) {
+            LecturaArchivoUI lecturaUI = new LecturaArchivoUI();
+            lecturaUI.setLocationRelativeTo(null);
+            lecturaUI.setTitle("Sistema Biblioteca");
+            lecturaUI.setVisible(true);
+        }
     }
     
 }

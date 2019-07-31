@@ -41,8 +41,6 @@ public class LecturaArchivoUI extends javax.swing.JFrame {
         txtArea = new javax.swing.JTextArea();
         btnLimpiar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         btnLeer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/if_accessories-text-editor_118805.png"))); // NOI18N
         btnLeer.setText("Leer");
         btnLeer.addActionListener(new java.awt.event.ActionListener() {

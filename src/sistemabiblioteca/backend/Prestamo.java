@@ -27,6 +27,7 @@ public class Prestamo implements Serializable{
         this.codigo = codigo;
         this.carnet = carnet;
         this.fechaPrestamo = fecha;
+        this.fechaLimite = fecha.plusDays(3);
     }
 
     public Prestamo() {
@@ -111,7 +112,7 @@ public class Prestamo implements Serializable{
         if (temp2 < 0) {
             temp2 = 0;
         }
-        int dias = temp1-temp2;
+        int dias = temp1-temp2+1;
         this.pagoNormal = (this.COSTO_NORMAL*dias);
         System.out.println("pago normal"+pagoNormal);
         return this.pagoNormal;
@@ -119,7 +120,7 @@ public class Prestamo implements Serializable{
 
     public int setPagoMora() {
         int dias = (int) DAYS.between(fechaLimite, fechaEntrega);
-        this.pagoMora = (this.COSTO_MORA*dias);
+        this.pagoMora = (this.COSTO_MORA*(dias+1));
         if (pagoMora < 0) {
             pagoMora = 0;
         }

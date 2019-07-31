@@ -26,41 +26,41 @@ public class Core {
 
     public void crearLibro(Libro libro) {
         //Crea el directorio libros en la raiz del proyecto
-        File file = new File("libros");
+        File file = new File("Libro");
         file.mkdir();
         
         //Verifica si el archivo ya existe, si ya existe muestra unmensaje
         //informandolo. De lo contrario se crea el archivo.
-        if (FileController.verifyFile("libros/" + libro.getCodigo() + ".bin")) {
+        if (FileController.verifyFile("Libro/" + libro.getCodigo() + ".bin")) {
             Interfaz.mostrarError("El libro ya esta registrado");
         } else {
-            fc.createFile(libro, "libros/" + libro.getCodigo() + ".bin");
+            fc.createFile(libro, "Libro/" + libro.getCodigo() + ".bin");
             Interfaz.mostrarInfo("Libro agregado!!");
         }
     }
     
     public void crearEstudiante(Estudiante est) {
         //Crea el directorio estudiantes en la raiz del proyecto
-        File file = new File("estudiantes");
+        File file = new File("Estudiante");
         file.mkdir();
         
         //Verifica si el archivo ya existe, si ya existe muestra unmensaje
         //informandolo. De lo contrario se crea el archivo.
-        if (FileController.verifyFile("estudiantes/" + est.getCarnet()+ ".bin")) {
+        if (FileController.verifyFile("Estudiante/" + est.getCarnet()+ ".bin")) {
             Interfaz.mostrarError("El estudiante ya esta registrado");
         } else {
-            fc.createFile(est, "estudiantes/" + est.getCarnet()+ ".bin");
+            fc.createFile(est, "Estudiante/" + est.getCarnet()+ ".bin");
             Interfaz.mostrarInfo("Estudiante agregado!!");
         }
     }
     
     public void crearPrestamo(String carnet, String codigo){
-        File file = new File("prestamos");
+        File file = new File("Prestamo");
         file.mkdir();
-        if (FileController.verifyFile("estudiantes/" + carnet + ".bin")) {
-            if (FileController.verifyFile("libros/" + codigo + ".bin")) {
-                estudiante = (Estudiante) fc.readFile("estudiantes/" + carnet + ".bin");
-                libro = (Libro) fc.readFile("libros/" + codigo + ".bin");
+        if (FileController.verifyFile("Estudiante/" + carnet + ".bin")) {
+            if (FileController.verifyFile("Libro/" + codigo + ".bin")) {
+                estudiante = (Estudiante) fc.readFile("Estudiante/" + carnet + ".bin");
+                libro = (Libro) fc.readFile("Libro/" + codigo + ".bin");
                 if (estudiante.getLibrosPrestados() < 3) {
                     if (libro.getCantidad() > 0) {
                         prestamo = new Prestamo();
@@ -69,12 +69,12 @@ public class Core {
                         prestamo.setFechaPrestamo(LocalDate.now());
                         prestamo.setFechaLimite(LocalDate.now().plusDays(3));
                         prestamo.setCodCarrera(estudiante.getCodigoCarrera());
-                        fc.createFile(prestamo, "prestamos/" + 
-                        MetodosApoyo.agregarNumeroDistintivo(prestamo.getCodigo(), "prestamos")+".bin");
+                        fc.createFile(prestamo, "Prestamo/" + 
+                        MetodosApoyo.agregarNumeroDistintivo(prestamo.getCodigo(), "Prestamo")+".bin");
                         estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()+1);
                         libro.setCantidad(libro.getCantidad()-1);
-                        fc.createFile(estudiante, "estudiantes/"+estudiante.getCarnet()+".bin");
-                        fc.createFile(libro, "libros/"+libro.getCodigo()+".bin");
+                        fc.createFile(estudiante, "Estudiante/"+estudiante.getCarnet()+".bin");
+                        fc.createFile(libro, "Libro/"+libro.getCodigo()+".bin");
                         Interfaz.mostrarInfo("Prestamo registrado!!");
                     }else {
                         Interfaz.mostrarError("No hay copias disponibles");
@@ -93,9 +93,9 @@ public class Core {
     //Recibe como parametro la cantidad nueva de libros y el codigo del libro.
     //Lee el archivo, actualiza la informacion y vuelve a escribirlo.
     public void agregarCopias(int cant, String cod) {
-        libro = (Libro) fc.readFile("libros/" + cod + ".bin");
+        libro = (Libro) fc.readFile("Libro/" + cod + ".bin");
         libro.setCantidad(libro.getCantidad()+cant);
-        fc.createFile(libro, "libros/" + libro.getCodigo() + ".bin");
+        fc.createFile(libro, "Libro/" + libro.getCodigo() + ".bin");
     }
 
     //Actualiza la tabla de libros:
@@ -107,10 +107,10 @@ public class Core {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         libros.clear();
-        File file = new File("libros/");
+        File file = new File("Libro/");
         String[] files = file.list();
         for (String f : files) {
-            libros.add((Libro) fc.readFile("libros/" + f));
+            libros.add((Libro) fc.readFile("Libro/" + f));
         }
         Collections.sort(libros, new Comparator<Libro>() {
             @Override
@@ -118,17 +118,21 @@ public class Core {
                 return obj1.getCodigo().compareTo(obj2.getCodigo());
             }
         });
-        for (Libro l : libros) {
-            Object item[] = new Object[6];
-            item[0] = l.getCodigo();
-            item[1] = l.getAutor();
-            item[2] = l.getTitulo();
-            item[3] = l.getCantidad();
-            item[4] = l.getFechaPublicacion();
-            item[5] = l.getEditorial();
-            model.addRow(item);
+        if (libros.isEmpty()) {
+            //nada 
+        }else{
+            for (Libro l : libros) {
+                Object item[] = new Object[6];
+                item[0] = l.getCodigo();
+                item[1] = l.getAutor();
+                item[2] = l.getTitulo();
+                item[3] = l.getCantidad();
+                item[4] = l.getFechaPublicacion();
+                item[5] = l.getEditorial();
+                model.addRow(item);
+            }
+            table.setModel(model);
         }
-        table.setModel(model);
     }
     
     //Se reciben 3 parametros: el index que indica que filtrado se esta realizando,
@@ -139,10 +143,10 @@ public class Core {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         libros.clear();
-        File file = new File("libros/");
+        File file = new File("Libro/");
         String[] files = file.list();
         for (String f : files) {
-            libros.add((Libro) fc.readFile("libros/" + f));
+            libros.add((Libro) fc.readFile("Libro/" + f));
         }
         Collections.sort(libros, new Comparator<Libro>() {
             @Override
@@ -150,21 +154,25 @@ public class Core {
                 return obj1.getCodigo().compareTo(obj2.getCodigo());
             }
         });
-        for (Libro l : libros) {
-            Object item[] = new Object[6];
-            item[0] = l.getCodigo();
-            item[1] = l.getAutor();
-            item[2] = l.getTitulo();
-            item[3] = l.getCantidad();
-            item[4] = l.getFechaPublicacion();
-            item[5] = l.getEditorial();
-            if (index == 0 && item[0].equals(texto)) {
-                model.addRow(item);
-            }else if (index == 1 && item[2].equals(texto)) {
-                model.addRow(item);
-            }else if (index == 2 && item[1].equals(texto)) {
-                model.addRow(item);
-            }
+        if (libros.isEmpty()) {
+            
+        }else {
+            for (Libro l : libros) {
+                Object item[] = new Object[6];
+                item[0] = l.getCodigo();
+                item[1] = l.getAutor();
+                item[2] = l.getTitulo();
+                item[3] = l.getCantidad();
+                item[4] = l.getFechaPublicacion();
+                item[5] = l.getEditorial();
+                if (index == 0 && item[0].equals(texto)) {
+                    model.addRow(item);
+                }else if (index == 1 && item[2].equals(texto)) {
+                    model.addRow(item);
+                }else if (index == 2 && item[1].equals(texto)) {
+                    model.addRow(item);
+                }
+        }
         }
         table.setModel(model);
     }
@@ -178,10 +186,10 @@ public class Core {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         estudiantes.clear();
-        File file = new File("estudiantes/");
+        File file = new File("Estudiante/");
         String[] files = file.list();
         for (String f : files) {
-            estudiantes.add((Estudiante) fc.readFile("estudiantes/" + f));
+            estudiantes.add((Estudiante) fc.readFile("Estudiante/" + f));
         }
         Collections.sort(estudiantes, new Comparator<Estudiante>() {
             @Override
@@ -189,25 +197,29 @@ public class Core {
                 return obj1.getCarnet().compareTo(obj2.getCarnet());
             }
         });
-        for (Estudiante e : estudiantes) {
-            Object item[] = new Object[4];
-            item[0] = e.getCarnet();
-            item[1] = e.getNombre();
-            item[2] = e.getCodigoCarrera();
-            item[3] = e.getFechaNac();
-            model.addRow(item);
+        if (estudiantes.isEmpty()) {
+            
+        }else {
+            for (Estudiante e : estudiantes) {
+                Object item[] = new Object[4];
+                item[0] = e.getCarnet();
+                item[1] = e.getNombre();
+                item[2] = e.getCodigoCarrera();
+                item[3] = e.getFechaNac();
+                model.addRow(item);
+            }
+            table.setModel(model);
         }
-        table.setModel(model);
     }
     
     public void filtrarListE(int index, String texto, JTable table){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         estudiantes.clear();
-        File file = new File("estudiantes/");
+        File file = new File("Estudiante/");
         String[] files = file.list();
         for (String f : files) {
-            estudiantes.add((Estudiante) fc.readFile("estudiantes/" + f));
+            estudiantes.add((Estudiante) fc.readFile("Estudiante/" + f));
         }
         Collections.sort(estudiantes, new Comparator<Estudiante>() {
             @Override
@@ -215,25 +227,29 @@ public class Core {
                 return obj1.getCarnet().compareTo(obj2.getCarnet());
             }
         });
-        for (Estudiante e : estudiantes) {
-            Object item[] = new Object[4];
-            item[0] = e.getCarnet();
-            item[1] = e.getNombre();
-            item[2] = e.getCodigoCarrera();
-            item[3] = e.getFechaNac();
-            if (index == 0 && item[0].equals(texto)) {
-                model.addRow(item);
-            }else if (index == 1 && item[1].equals(texto)) {
-                model.addRow(item);
-            }else if (index == 2 && item[2].toString().equals(texto)) {
-                model.addRow(item);
+        if (estudiantes.isEmpty()) {
+            
+        }else {
+            for (Estudiante e : estudiantes) {
+                Object item[] = new Object[4];
+                item[0] = e.getCarnet();
+                item[1] = e.getNombre();
+                item[2] = e.getCodigoCarrera();
+                item[3] = e.getFechaNac();
+                if (index == 0 && item[0].equals(texto)) {
+                    model.addRow(item);
+                }else if (index == 1 && item[1].equals(texto)) {
+                    model.addRow(item);
+                }else if (index == 2 && item[2].toString().equals(texto)) {
+                    model.addRow(item);
+                }
             }
+            table.setModel(model);
         }
-        table.setModel(model);
     }
     
     public void calcularTotal(String carnet, String codigo){
-        File file = new File("prestamos");
+        File file = new File("Prestamo");
         String[] nombres = file.list();
         ArrayList<String> prestamos = new ArrayList();
         for (String n : nombres) {
@@ -242,10 +258,10 @@ public class Core {
             }
         }
         if (prestamos.size() == 1) {
-            if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
-                libro = (Libro)fc.readFile("libros/"+codigo+".bin");
-                estudiante = (Estudiante)fc.readFile("estudiantes/"+carnet+".bin");
-                prestamo = (Prestamo)fc.readFile("prestamos/"+prestamos.get(0));
+            if (FileController.verifyFile("Estudiante/"+carnet+".bin")) {
+                libro = (Libro)fc.readFile("Libro/"+codigo+".bin");
+                estudiante = (Estudiante)fc.readFile("Estudiante/"+carnet+".bin");
+                prestamo = (Prestamo)fc.readFile("Prestamo/"+prestamos.get(0));
                 prestamo.setFechaEntrega();
                 prestamo.setEstadoMora();
                 prestamo.setTotal();
@@ -253,10 +269,10 @@ public class Core {
                 
                 estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()-1);
                 libro.setCantidad(libro.getCantidad()+1);
-                fc.createFile(prestamo, "prestamos/"+ prestamos.get(0));
-                fc.createFile(libro, "libros/"+codigo+".bin");
-                fc.createFile(estudiante, "estudiantes/"+carnet+".bin");
-                Interfaz.mostrarInfo("Total a pagar: " + prestamo.getTotal());
+                fc.createFile(prestamo, "Prestamo/"+ prestamos.get(0));
+                fc.createFile(libro, "Libro/"+codigo+".bin");
+                fc.createFile(estudiante, "Estudiante/"+carnet+".bin");
+                Interfaz.mostrarInfo("Total a pagar: Q." + prestamo.getTotal());
             }else {
                 Interfaz.mostrarError("El estudiante no esta registrado en el sistema");
             }
@@ -271,10 +287,10 @@ public class Core {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         prestamos.clear();
-        File file = new File("prestamos/");
+        File file = new File("Prestamo/");
         String[] files = file.list();
         for (String f : files) {
-            prestamos.add((Prestamo)fc.readFile("prestamos/" + f));
+            prestamos.add((Prestamo)fc.readFile("Prestamo/" + f));
         }
         Collections.sort(prestamos, new Comparator<Prestamo>() {
             @Override
@@ -282,35 +298,39 @@ public class Core {
                 return obj1.getCodigo().compareTo(obj2.getCodigo());
             }
         });
-        for (Prestamo p : prestamos) {
-            p.setEstadoMora();
-            Object item[] = new Object[4];
-            item[0] = p.getCodigo();
-            if (option == 5) {
-                libro = (Libro) fc.readFile("libros/"+p.getCodigo()+".bin");
-                item[1] = libro.getTitulo();
-                item[2] = p.getCarnet();
-            }else {
-                item[1] = p.getCarnet();
-                item[2] = p.getFechaPrestamo();
+        if (prestamos.isEmpty()) {
+            
+        }else {
+            for (Prestamo p : prestamos) {
+                p.setEstadoMora();
+                Object item[] = new Object[4];
+                item[0] = p.getCodigo();
+                if (option == 5) {
+                    libro = (Libro) fc.readFile("Libro/"+p.getCodigo()+".bin");
+                    item[1] = libro.getTitulo();
+                    item[2] = p.getCarnet();
+                }else {
+                    item[1] = p.getCarnet();
+                    item[2] = p.getFechaPrestamo();
+                }
+                if (option == 4 && p.isDevuelto()) {
+                    item[3] = "Finalizado";
+                }else if (option == 4 && !p.isDevuelto()) {
+                    item[3] = "Activo";
+                }else {
+                    item[3] = p.getFechaLimite();
+                }
+                if (item[3].toString().equals(LocalDate.now().toString()) && option == 1) {
+                    model.addRow(item);
+                }else if (option == 2 && p.isEstadoMora() && !p.isDevuelto()) {
+                    model.addRow(item);
+                }else if (option == 4 && item[1].toString().equals(carnet)) {
+                    model.addRow(item);
+                }else if (option ==5 && item[2].toString().equals(carnet) && !p.isDevuelto()) {
+                    model.addRow(item);
+                }
             }
-            if (option == 4 && p.isDevuelto()) {
-                item[3] = "Finalizado";
-            }else if (option == 4 && !p.isDevuelto()) {
-                item[3] = "Activo";
-            }else {
-                item[3] = p.getFechaLimite();
-            }
-            if (item[3].toString().equals(LocalDate.now().toString()) && option == 1) {
-                model.addRow(item);
-            }else if (option == 2 && p.isEstadoMora() && !p.isDevuelto()) {
-                model.addRow(item);
-            }else if (option == 4 && item[1].toString().equals(carnet)) {
-                model.addRow(item);
-            }else if (option ==5 && item[2].toString().equals(carnet) && !p.isDevuelto()) {
-                model.addRow(item);
-            }
+            table.setModel(model);
         }
-        table.setModel(model);
     }
 }

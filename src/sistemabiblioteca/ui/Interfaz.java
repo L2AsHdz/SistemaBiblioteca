@@ -1,16 +1,20 @@
 package sistemabiblioteca.ui;
 
+import java.io.File;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import sistemabiblioteca.backend.Archivos.FileController;
 import sistemabiblioteca.backend.Core;
 import sistemabiblioteca.backend.Estudiante;
 import sistemabiblioteca.backend.Libro;
+import sistemabiblioteca.interfaz.LecturaArchivoUI;
 
 public class Interfaz extends javax.swing.JFrame {
     private Libro libro;
     private Estudiante estudiante;
     private Core core = new Core();
+    private LecturaArchivoUI lecturaUI = new LecturaArchivoUI();
+
     /**
      * Creates new form Interfaz
      */
@@ -111,6 +115,7 @@ public class Interfaz extends javax.swing.JFrame {
         menuPrestamos = new javax.swing.JMenu();
         itmAddPrestamo = new javax.swing.JMenuItem();
         itmDevolucion = new javax.swing.JMenuItem();
+        itmLectura = new javax.swing.JMenuItem();
         menuReportes = new javax.swing.JMenu();
         itmReporte1 = new javax.swing.JMenuItem();
         itmReporte2 = new javax.swing.JMenuItem();
@@ -420,9 +425,10 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarP)
-                    .addComponent(btnPrestar))
+                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPrestar)
+                    .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCancelarP)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblErrorP)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -584,7 +590,6 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jdDevolucion.setPreferredSize(new java.awt.Dimension(450, 150));
         jdDevolucion.setSize(new java.awt.Dimension(550, 150));
 
         jLabel15.setText("Carnet del estudiante:");
@@ -779,6 +784,11 @@ public class Interfaz extends javax.swing.JFrame {
         menuLibros.add(itmAddCopias);
 
         itmVerListLibros.setText("Ver Listado");
+        itmVerListLibros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmVerListLibrosActionPerformed(evt);
+            }
+        });
         menuLibros.add(itmVerListLibros);
 
         jMenu1.add(menuLibros);
@@ -795,6 +805,11 @@ public class Interfaz extends javax.swing.JFrame {
         menuEstudiante.add(itmAddEstudiante);
 
         itmVerListEst.setText("Ver Listado");
+        itmVerListEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmVerListEstActionPerformed(evt);
+            }
+        });
         menuEstudiante.add(itmVerListEst);
 
         jMenu1.add(menuEstudiante);
@@ -820,6 +835,14 @@ public class Interfaz extends javax.swing.JFrame {
         menuPrestamos.add(itmDevolucion);
 
         jMenu1.add(menuPrestamos);
+
+        itmLectura.setText("Lectura de Archivo");
+        itmLectura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmLecturaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itmLectura);
 
         jMenuBar1.add(jMenu1);
 
@@ -888,14 +911,17 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmAddLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddLibrosActionPerformed
+        cleanAddBook();
         abrirDialogo(jdAddLibro, "Ingreso de libros");
     }//GEN-LAST:event_itmAddLibrosActionPerformed
 
     private void itmAddEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddEstudianteActionPerformed
+        cleanAddStudent();
         abrirDialogo(jdAddEstudiante, "Ingreso de estudiantes");
     }//GEN-LAST:event_itmAddEstudianteActionPerformed
 
     private void itmAddPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddPrestamoActionPerformed
+        cleanAddPrestamo();
         abrirDialogo(jdAddPrestamo, "Nuevo Prestamo");
     }//GEN-LAST:event_itmAddPrestamoActionPerformed
 
@@ -951,15 +977,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnVerListadoLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoLActionPerformed
         cleanAddBook();
-        core.refrescarTablaLibros(tblListLibros);
-        jdListLibros.repaint();
-        abrirDialogo(jdListLibros, "Listado de libros");
-        cbOpcionFiltroL.requestFocus();
+        verListadoLibros();
     }//GEN-LAST:event_btnVerListadoLActionPerformed
 
     private void itmAddCopiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddCopiasActionPerformed
         String codLibro = JOptionPane.showInputDialog("Digite el codigo del libro");
-        if (FileController.verifyFile("libros/"+codLibro+".bin")) {
+        if (FileController.verifyFile("Libro/"+codLibro+".bin")) {
             String cantidad = JOptionPane.showInputDialog("Ingrese cantidad de copias nuevas");
             while (!isNumeric(cantidad)) {
                 mostrarError("Debe ingresar un numero");
@@ -1031,10 +1054,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnVerListadoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoEActionPerformed
         cleanAddStudent();
-        core.refrescarTablaEstudiantes(tblListEstudiantes);
-        jdListEstudiantes.repaint();
-        abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
-        cbOpcionFiltroE.requestFocus();
+        verListadoEstudiantes();
     }//GEN-LAST:event_btnVerListadoEActionPerformed
 
     private void btnFiltroEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroEActionPerformed
@@ -1115,18 +1135,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         cleanAddStudent();
-        core.refrescarTablaEstudiantes(tblListEstudiantes);
-        jdListEstudiantes.repaint();
-        abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
-        cbOpcionFiltroE.requestFocus();
+        verListadoEstudiantes();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         cleanAddBook();
-        core.refrescarTablaLibros(tblListLibros);
-        jdListLibros.repaint();
-        abrirDialogo(jdListLibros, "Listado de libros");
-        cbOpcionFiltroL.requestFocus();
+        verListadoLibros();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void itmReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte1ActionPerformed
@@ -1145,7 +1159,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void itmReporte4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte4ActionPerformed
         String carnet = JOptionPane.showInputDialog("Digite el carnet del estudiante");
-        if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
+        if (FileController.verifyFile("Estudiante/"+carnet+".bin")) {
             core.reportes(tblReporte4,4,carnet);
             jdReporte4.repaint();
             abrirDialogo(jdReporte4, "Prestamos hechos por un estudiante");
@@ -1157,7 +1171,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void itmReporte5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte5ActionPerformed
         String carnet = JOptionPane.showInputDialog("Digite el carnet del estudiante");
-        if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
+        if (FileController.verifyFile("Estudiante/"+carnet+".bin")) {
             core.reportes(tblReporte5,5,carnet);
             jdReporte5.repaint();
             abrirDialogo(jdReporte5, "Libros prestados a un estudiante");
@@ -1166,6 +1180,20 @@ public class Interfaz extends javax.swing.JFrame {
             mostrarError("El estudiante no existe en el sistema");
         }
     }//GEN-LAST:event_itmReporte5ActionPerformed
+
+    private void itmVerListLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmVerListLibrosActionPerformed
+        verListadoLibros();
+    }//GEN-LAST:event_itmVerListLibrosActionPerformed
+
+    private void itmVerListEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmVerListEstActionPerformed
+        verListadoEstudiantes();
+    }//GEN-LAST:event_itmVerListEstActionPerformed
+
+    private void itmLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmLecturaActionPerformed
+        lecturaUI.setLocationRelativeTo(null);
+        lecturaUI.setTitle("Sistema Biblioteca");
+        lecturaUI.setVisible(true);
+    }//GEN-LAST:event_itmLecturaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1194,6 +1222,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmAddLibros;
     private javax.swing.JMenuItem itmAddPrestamo;
     private javax.swing.JMenuItem itmDevolucion;
+    private javax.swing.JMenuItem itmLectura;
     private javax.swing.JMenuItem itmReporte1;
     private javax.swing.JMenuItem itmReporte2;
     private javax.swing.JMenuItem itmReporte3;
@@ -1353,5 +1382,32 @@ public class Interfaz extends javax.swing.JFrame {
         txtCarnetDev.setText("");
         ftxtCodigoDev.setText("");
         lblErrorDev.setVisible(false);
+    }
+    
+    private void verListadoLibros(){
+        core.refrescarTablaLibros(tblListLibros);
+        jdListLibros.repaint();
+        abrirDialogo(jdListLibros, "Listado de libros");
+        cbOpcionFiltroL.requestFocus();
+    }
+    
+    private void verListadoEstudiantes(){
+        core.refrescarTablaEstudiantes(tblListEstudiantes);
+        jdListEstudiantes.repaint();
+        abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
+        cbOpcionFiltroE.requestFocus();
+    }
+    
+    public boolean verificarFiles(){
+         File libro = new File("Libro");
+        String[] libros = libro.list();
+        File estudiante = new File("Estudiante");
+        String[] estudiantes = estudiante.list();
+        File prestamo = new File("Prestamo");
+        String[] prestamos = prestamo.list();
+        if (libros.length == 0 && estudiantes.length == 0 && prestamos.length == 0) {
+            return true;
+        }
+        return false;
     }
 }
