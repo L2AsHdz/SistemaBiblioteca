@@ -58,14 +58,13 @@ public class Interfaz extends javax.swing.JFrame {
         lblErrorE = new javax.swing.JLabel();
         txtCodCarrera = new javax.swing.JTextField();
         jdAddPrestamo = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
+        lblErrorP = new javax.swing.JLabel();
         btnPrestar = new javax.swing.JButton();
         btnCancelarP = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtCarnetPrestamo = new javax.swing.JTextField();
         ftxtCodPrestamo1 = new javax.swing.JFormattedTextField();
-        lblErrorP = new javax.swing.JLabel();
         jdListLibros = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListLibros = new javax.swing.JTable();
@@ -87,11 +86,16 @@ public class Interfaz extends javax.swing.JFrame {
         txtCarnetDev = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        btnFinalizar = new javax.swing.JButton();
         lblErrorDev = new javax.swing.JLabel();
         ftxtCodigoDev = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jdReporte1and2 = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblReporte1 = new javax.swing.JTable();
+        jdReporte4and5 = new javax.swing.JDialog();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblReporte4and5 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -104,6 +108,12 @@ public class Interfaz extends javax.swing.JFrame {
         itmAddPrestamo = new javax.swing.JMenuItem();
         itmDevolucion = new javax.swing.JMenuItem();
         menuReportes = new javax.swing.JMenu();
+        itmReporte1 = new javax.swing.JMenuItem();
+        itmReporte2 = new javax.swing.JMenuItem();
+        itmReporte3 = new javax.swing.JMenuItem();
+        itmReporte4 = new javax.swing.JMenuItem();
+        itmReporte5 = new javax.swing.JMenuItem();
+        itmReporte6 = new javax.swing.JMenuItem();
 
         jdAddLibro.setModal(true);
         jdAddLibro.setSize(new java.awt.Dimension(350, 260));
@@ -340,7 +350,12 @@ public class Interfaz extends javax.swing.JFrame {
         );
 
         jdAddPrestamo.setModal(true);
-        jdAddPrestamo.setSize(new java.awt.Dimension(310, 170));
+        jdAddPrestamo.setSize(new java.awt.Dimension(350, 170));
+
+        lblErrorP.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblErrorP.setVisible(false);
+        lblErrorP.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorP.setText("Mensaje");
 
         btnPrestar.setText("Prestar");
         btnPrestar.addActionListener(new java.awt.event.ActionListener() {
@@ -367,62 +382,46 @@ public class Interfaz extends javax.swing.JFrame {
         }
         ftxtCodPrestamo1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        lblErrorP.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        lblErrorP.setVisible(false);
-        lblErrorP.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorP.setText("Mensaje");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblErrorP)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(txtCarnetPrestamo)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPrestar)
-                            .addComponent(jLabel12))
-                        .addGap(17, 17, 17)
-                        .addComponent(btnCancelarP)))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtCarnetPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrestar)
-                    .addComponent(btnCancelarP))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblErrorP)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jdAddPrestamoLayout = new javax.swing.GroupLayout(jdAddPrestamo.getContentPane());
         jdAddPrestamo.getContentPane().setLayout(jdAddPrestamoLayout);
         jdAddPrestamoLayout.setHorizontalGroup(
             jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdAddPrestamoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdAddPrestamoLayout.createSequentialGroup()
+                        .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12)
+                            .addGroup(jdAddPrestamoLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnCancelarP, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCarnetPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPrestar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblErrorP))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jdAddPrestamoLayout.setVerticalGroup(
             jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jdAddPrestamoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtCarnetPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(ftxtCodPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jdAddPrestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarP)
+                    .addComponent(btnPrestar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblErrorP)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jdAddPrestamo.getAccessibleContext().setAccessibleParent(this);
@@ -582,7 +581,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
 
         jdDevolucion.setPreferredSize(new java.awt.Dimension(450, 150));
-        jdDevolucion.setSize(new java.awt.Dimension(450, 160));
+        jdDevolucion.setSize(new java.awt.Dimension(550, 150));
 
         jLabel15.setText("Carnet del estudiante:");
 
@@ -594,14 +593,6 @@ public class Interfaz extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-
-        jLabel17.setText("Total a cancelar;");
-
-        jLabel18.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel18.setText("TOTAL");
-
-        btnFinalizar.setText("Finalizar Prestamo");
-        btnFinalizar.setEnabled(false);
 
         lblErrorDev.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         lblErrorDev.setVisible(false);
@@ -615,6 +606,20 @@ public class Interfaz extends javax.swing.JFrame {
         }
         ftxtCodigoDev.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        jButton1.setText("Ver Estudiantes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Ver Libros");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jdDevolucionLayout = new javax.swing.GroupLayout(jdDevolucion.getContentPane());
         jdDevolucion.getContentPane().setLayout(jdDevolucionLayout);
         jdDevolucionLayout.setHorizontalGroup(
@@ -622,45 +627,95 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jdDevolucionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblErrorDev)
                     .addGroup(jdDevolucionLayout.createSequentialGroup()
-                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCarnetDev)
-                            .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                        .addGap(30, 30, 30)
-                        .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnFinalizar)))
+                        .addComponent(txtCarnetDev, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jdDevolucionLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel18))
-                    .addComponent(lblErrorDev))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jdDevolucionLayout.setVerticalGroup(
             jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdDevolucionLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(25, 25, 25)
                 .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtCarnetDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(jLabel16)
+                    .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(btnFinalizar)
-                    .addComponent(ftxtCodigoDev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(jdDevolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrorDev)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        jdReporte1and2.setSize(new java.awt.Dimension(530, 300));
+
+        tblReporte1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Carnet", "Fecha", "Fecha Limite"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblReporte1);
+
+        javax.swing.GroupLayout jdReporte1and2Layout = new javax.swing.GroupLayout(jdReporte1and2.getContentPane());
+        jdReporte1and2.getContentPane().setLayout(jdReporte1and2Layout);
+        jdReporte1and2Layout.setHorizontalGroup(
+            jdReporte1and2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+        );
+        jdReporte1and2Layout.setVerticalGroup(
+            jdReporte1and2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+        );
+
+        jdReporte4and5.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jdReporte4and5.setSize(new java.awt.Dimension(530, 300));
+
+        tblReporte4and5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Carnet", "Codigo", "Fecha", "Estado"
+            }
+        ));
+        jScrollPane4.setViewportView(tblReporte4and5);
+
+        javax.swing.GroupLayout jdReporte4and5Layout = new javax.swing.GroupLayout(jdReporte4and5.getContentPane());
+        jdReporte4and5.getContentPane().setLayout(jdReporte4and5Layout);
+        jdReporte4and5Layout.setHorizontalGroup(
+            jdReporte4and5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+        );
+        jdReporte4and5Layout.setVerticalGroup(
+            jdReporte4and5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -729,6 +784,40 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuBar1.add(menuPrestamos);
 
         menuReportes.setText("Reportes");
+
+        itmReporte1.setText("Prestamos a entregarse hoy");
+        itmReporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmReporte1ActionPerformed(evt);
+            }
+        });
+        menuReportes.add(itmReporte1);
+
+        itmReporte2.setText("Prestamos en mora");
+        itmReporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmReporte2ActionPerformed(evt);
+            }
+        });
+        menuReportes.add(itmReporte2);
+
+        itmReporte3.setText("Total de dinero recaudado (intervalo de tiempo)");
+        menuReportes.add(itmReporte3);
+
+        itmReporte4.setText("Prestamos hechos por un estudiante");
+        itmReporte4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmReporte4ActionPerformed(evt);
+            }
+        });
+        menuReportes.add(itmReporte4);
+
+        itmReporte5.setText("Prestamos activos de un estudiante");
+        menuReportes.add(itmReporte5);
+
+        itmReporte6.setText("Prestamos hechos por carrera (intervalo de tiempo)");
+        menuReportes.add(itmReporte6);
+
         jMenuBar1.add(menuReportes);
 
         setJMenuBar(jMenuBar1);
@@ -737,11 +826,11 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 636, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGap(0, 365, Short.MAX_VALUE)
         );
 
         pack();
@@ -964,12 +1053,57 @@ public class Interfaz extends javax.swing.JFrame {
         }
         if (flag) {
             core.calcularTotal(txtCarnetDev.getText(),ftxtCodigoDev.getText());
+            cleanDevolucion();
         }
+        txtCarnetDev.requestFocus();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void itmDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmDevolucionActionPerformed
         abrirDialogo(jdDevolucion, "Devolucion");
     }//GEN-LAST:event_itmDevolucionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cleanAddStudent();
+        core.refrescarTablaEstudiantes(tblListEstudiantes);
+        jdListEstudiantes.repaint();
+        abrirDialogo(jdListEstudiantes, "Listado de estudiantes");
+        cbOpcionFiltroE.requestFocus();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        cleanAddBook();
+        core.refrescarTablaLibros(tblListLibros);
+        jdListLibros.repaint();
+        abrirDialogo(jdListLibros, "Listado de libros");
+        cbOpcionFiltroL.requestFocus();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void itmReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte1ActionPerformed
+        core.reportes(tblReporte1,1,"");
+        jdReporte1and2.repaint();
+        abrirDialogo(jdReporte1and2, "Prestamo de libros a entregarse hoy");
+        tblReporte1.requestFocus();
+    }//GEN-LAST:event_itmReporte1ActionPerformed
+
+    private void itmReporte2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte2ActionPerformed
+        core.reportes(tblReporte1,2,"");
+        jdReporte1and2.repaint();
+        abrirDialogo(jdReporte1and2, "Prestamos morosos");
+        tblReporte1.requestFocus();
+    }//GEN-LAST:event_itmReporte2ActionPerformed
+
+    private void itmReporte4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte4ActionPerformed
+        String carnet = JOptionPane.showInputDialog("Digite el carnet del estudiante");
+        if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
+            core.reportes(tblReporte4and5,3,carnet);
+            jdReporte4and5.repaint();
+            abrirDialogo(jdReporte4and5, "Prestamos hechos por un estudiante");
+            tblReporte4and5.requestFocus();
+        }else {
+            mostrarError("El estudiante no existe en el sistema");
+        }
+        
+    }//GEN-LAST:event_itmReporte4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -983,7 +1117,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCleanFlitroE;
     private javax.swing.JButton btnFiltrarL;
     private javax.swing.JButton btnFiltroE;
-    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnPrestar;
     private javax.swing.JButton btnVerListadoE;
     private javax.swing.JButton btnVerListadoL;
@@ -999,8 +1132,16 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmAddLibros;
     private javax.swing.JMenuItem itmAddPrestamo;
     private javax.swing.JMenuItem itmDevolucion;
+    private javax.swing.JMenuItem itmReporte1;
+    private javax.swing.JMenuItem itmReporte2;
+    private javax.swing.JMenuItem itmReporte3;
+    private javax.swing.JMenuItem itmReporte4;
+    private javax.swing.JMenuItem itmReporte5;
+    private javax.swing.JMenuItem itmReporte6;
     private javax.swing.JMenuItem itmVerListEst;
     private javax.swing.JMenuItem itmVerListLibros;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1009,8 +1150,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1020,15 +1159,18 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JDialog jdAddEstudiante;
     private javax.swing.JDialog jdAddLibro;
     private javax.swing.JDialog jdAddPrestamo;
     private javax.swing.JDialog jdDevolucion;
     private javax.swing.JDialog jdListEstudiantes;
     private javax.swing.JDialog jdListLibros;
+    private javax.swing.JDialog jdReporte1and2;
+    private javax.swing.JDialog jdReporte4and5;
     private javax.swing.JLabel lblErrorDev;
     private javax.swing.JLabel lblErrorE;
     private javax.swing.JLabel lblErrorL;
@@ -1039,6 +1181,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu menuReportes;
     private javax.swing.JTable tblListEstudiantes;
     private javax.swing.JTable tblListLibros;
+    private javax.swing.JTable tblReporte1;
+    private javax.swing.JTable tblReporte4and5;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtCarnetDev;
@@ -1139,4 +1283,9 @@ public class Interfaz extends javax.swing.JFrame {
         lblErrorP.setVisible(false);
     }
    
+    private void cleanDevolucion(){
+        txtCarnetDev.setText("");
+        ftxtCodigoDev.setText("");
+        lblErrorDev.setVisible(false);
+    }
 }

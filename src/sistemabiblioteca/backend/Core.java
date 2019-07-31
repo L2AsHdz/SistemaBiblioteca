@@ -16,6 +16,7 @@ public class Core {
     private final FileController fc = new FileController();
     private ArrayList<Libro> libros = new ArrayList();
     private ArrayList<Estudiante> estudiantes = new ArrayList();
+    private ArrayList<Prestamo> prestamos = new ArrayList();
     private Libro libro;
     private Estudiante estudiante;
     private Prestamo prestamo = new Prestamo();
@@ -67,6 +68,7 @@ public class Core {
                         prestamo.setCodigo(libro.getCodigo());
                         prestamo.setFechaPrestamo(LocalDate.now());
                         prestamo.setFechaLimite(LocalDate.now().plusDays(3));
+                        prestamo.setCodCarrera(estudiante.getCodigoCarrera());
                         fc.createFile(prestamo, "prestamos/" + 
                         MetodosApoyo.agregarNumeroDistintivo(prestamo.getCodigo(), "prestamos")+".bin");
                         estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()+1);
@@ -260,5 +262,44 @@ public class Core {
         }else {
             
         }
+    }
+    
+    public void reportes(JTable table, int option,String carnet){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        prestamos.clear();
+        File file = new File("prestamos/");
+        String[] files = file.list();
+        for (String f : files) {
+            prestamos.add((Prestamo)fc.readFile("prestamos/" + f));
+        }
+        Collections.sort(prestamos, new Comparator<Prestamo>() {
+            @Override
+            public int compare(Prestamo obj1, Prestamo obj2) {
+                return obj1.getCodigo().compareTo(obj2.getCodigo());
+            }
+        });
+        for (Prestamo p : prestamos) {
+            p.setEstadoMora();
+            Object item[] = new Object[4];
+            item[0] = p.getCodigo();
+            item[1] = p.getCarnet();
+            item[2] = p.getFechaPrestamo();
+            if (option == 3 && p.isDevuelto()) {
+                item[3] = "Finalizado";
+            }else if (option == 3 && !p.isDevuelto()) {
+                item[3] = "Activo";
+            }else {
+                item[3] = p.getFechaLimite();
+            }
+            if (item[3].toString().equals(LocalDate.now().toString()) && option == 1) {
+                model.addRow(item);
+            }else if (option == 2 && p.isEstadoMora()) {
+                model.addRow(item);
+            }else if (option == 3 && item[1].toString().equals(carnet)) {
+                model.addRow(item);
+            }
+        }
+        table.setModel(model);
     }
 }
