@@ -5,25 +5,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Estudiante {
-    private int carnet;
+    private String carnet;
     private String Nombre;
     private int codigoCarrera;
     private String fechaNac;
 
-    public Estudiante(int carnet, String Nombre, int codigoCarrera) {
+    public Estudiante(String carnet, String Nombre, int codigoCarrera) {
         this.carnet = carnet;
         this.Nombre = Nombre;
         this.codigoCarrera = codigoCarrera;
     }
 
-    public Estudiante(int carnet, String Nombre, int codigoCarrera, String fechaNac) {
+    public Estudiante(String carnet, String Nombre, int codigoCarrera, String fechaNac) {
         this.carnet = carnet;
         this.Nombre = Nombre;
         this.codigoCarrera = codigoCarrera;
         this.fechaNac = fechaNac;
     }
 
-    public int getCarnet() {
+    public String getCarnet() {
         return carnet;
     }
 

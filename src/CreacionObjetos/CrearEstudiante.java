@@ -35,7 +35,7 @@ public class CrearEstudiante {
 
                 if (!MetodosApoyo.verificarExistenciaArchivo(String.valueOf(carnet), "Estudiante")) {
                     if (carrera >= 1 && carrera <= 5) {
-                        Estudiante estudiante = new Estudiante(carnet, nombre, carrera);//Crea el objeto
+                        Estudiante estudiante = new Estudiante(String.valueOf(carnet), nombre, carrera);//Crea el objeto
                         persistirEstudiante(estudiante);//Crea el archivo binario con el estudiante
                         mensaje = "El estudiante " + nombre + " ha sido agregado exitosamente.";
                     } else {
