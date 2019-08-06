@@ -253,6 +253,9 @@ public class Core {
                 
                 estudiante.setLibrosPrestados(estudiante.getLibrosPrestados()-1);
                 libro.setCantidad(libro.getCantidad()+1);
+                fc.createFile(prestamo, "prestamos/"+ prestamos.get(0));
+                fc.createFile(libro, "libros/"+codigo+".bin");
+                fc.createFile(estudiante, "estudiantes/"+carnet+".bin");
                 Interfaz.mostrarInfo("Total a pagar: " + prestamo.getTotal());
             }else {
                 Interfaz.mostrarError("El estudiante no esta registrado en el sistema");
@@ -283,20 +286,28 @@ public class Core {
             p.setEstadoMora();
             Object item[] = new Object[4];
             item[0] = p.getCodigo();
-            item[1] = p.getCarnet();
-            item[2] = p.getFechaPrestamo();
-            if (option == 3 && p.isDevuelto()) {
+            if (option == 5) {
+                libro = (Libro) fc.readFile("libros/"+p.getCodigo()+".bin");
+                item[1] = libro.getTitulo();
+                item[2] = p.getCarnet();
+            }else {
+                item[1] = p.getCarnet();
+                item[2] = p.getFechaPrestamo();
+            }
+            if (option == 4 && p.isDevuelto()) {
                 item[3] = "Finalizado";
-            }else if (option == 3 && !p.isDevuelto()) {
+            }else if (option == 4 && !p.isDevuelto()) {
                 item[3] = "Activo";
             }else {
                 item[3] = p.getFechaLimite();
             }
             if (item[3].toString().equals(LocalDate.now().toString()) && option == 1) {
                 model.addRow(item);
-            }else if (option == 2 && p.isEstadoMora()) {
+            }else if (option == 2 && p.isEstadoMora() && !p.isDevuelto()) {
                 model.addRow(item);
-            }else if (option == 3 && item[1].toString().equals(carnet)) {
+            }else if (option == 4 && item[1].toString().equals(carnet)) {
+                model.addRow(item);
+            }else if (option ==5 && item[2].toString().equals(carnet)) {
                 model.addRow(item);
             }
         }

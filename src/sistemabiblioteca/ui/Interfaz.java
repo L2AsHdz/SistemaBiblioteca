@@ -93,9 +93,12 @@ public class Interfaz extends javax.swing.JFrame {
         jdReporte1and2 = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblReporte1 = new javax.swing.JTable();
-        jdReporte4and5 = new javax.swing.JDialog();
+        jdReporte4 = new javax.swing.JDialog();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblReporte4and5 = new javax.swing.JTable();
+        tblReporte4 = new javax.swing.JTable();
+        jdReporte5 = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblReporte5 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuLibros = new javax.swing.JMenu();
         itmAddLibros = new javax.swing.JMenuItem();
@@ -694,10 +697,10 @@ public class Interfaz extends javax.swing.JFrame {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
         );
 
-        jdReporte4and5.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jdReporte4and5.setSize(new java.awt.Dimension(530, 300));
+        jdReporte4.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jdReporte4.setSize(new java.awt.Dimension(530, 300));
 
-        tblReporte4and5.setModel(new javax.swing.table.DefaultTableModel(
+        tblReporte4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -705,17 +708,48 @@ public class Interfaz extends javax.swing.JFrame {
                 "Carnet", "Codigo", "Fecha", "Estado"
             }
         ));
-        jScrollPane4.setViewportView(tblReporte4and5);
+        jScrollPane4.setViewportView(tblReporte4);
 
-        javax.swing.GroupLayout jdReporte4and5Layout = new javax.swing.GroupLayout(jdReporte4and5.getContentPane());
-        jdReporte4and5.getContentPane().setLayout(jdReporte4and5Layout);
-        jdReporte4and5Layout.setHorizontalGroup(
-            jdReporte4and5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jdReporte4Layout = new javax.swing.GroupLayout(jdReporte4.getContentPane());
+        jdReporte4.getContentPane().setLayout(jdReporte4Layout);
+        jdReporte4Layout.setHorizontalGroup(
+            jdReporte4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
-        jdReporte4and5Layout.setVerticalGroup(
-            jdReporte4and5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jdReporte4Layout.setVerticalGroup(
+            jdReporte4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+        );
+
+        jdReporte5.setSize(new java.awt.Dimension(530, 300));
+
+        tblReporte5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Nombre libro", "Carnet", "Fecha Limite"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblReporte5);
+
+        javax.swing.GroupLayout jdReporte5Layout = new javax.swing.GroupLayout(jdReporte5.getContentPane());
+        jdReporte5.getContentPane().setLayout(jdReporte5Layout);
+        jdReporte5Layout.setHorizontalGroup(
+            jdReporte5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+        );
+        jdReporte5Layout.setVerticalGroup(
+            jdReporte5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -812,7 +846,12 @@ public class Interfaz extends javax.swing.JFrame {
         });
         menuReportes.add(itmReporte4);
 
-        itmReporte5.setText("Prestamos activos de un estudiante");
+        itmReporte5.setText("Libros prestados actualmente a un estudiante");
+        itmReporte5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmReporte5ActionPerformed(evt);
+            }
+        });
         menuReportes.add(itmReporte5);
 
         itmReporte6.setText("Prestamos hechos por carrera (intervalo de tiempo)");
@@ -1095,15 +1134,26 @@ public class Interfaz extends javax.swing.JFrame {
     private void itmReporte4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte4ActionPerformed
         String carnet = JOptionPane.showInputDialog("Digite el carnet del estudiante");
         if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
-            core.reportes(tblReporte4and5,3,carnet);
-            jdReporte4and5.repaint();
-            abrirDialogo(jdReporte4and5, "Prestamos hechos por un estudiante");
-            tblReporte4and5.requestFocus();
+            core.reportes(tblReporte4,4,carnet);
+            jdReporte4.repaint();
+            abrirDialogo(jdReporte4, "Prestamos hechos por un estudiante");
+            tblReporte4.requestFocus();
         }else {
             mostrarError("El estudiante no existe en el sistema");
         }
-        
     }//GEN-LAST:event_itmReporte4ActionPerformed
+
+    private void itmReporte5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReporte5ActionPerformed
+        String carnet = JOptionPane.showInputDialog("Digite el carnet del estudiante");
+        if (FileController.verifyFile("estudiantes/"+carnet+".bin")) {
+            core.reportes(tblReporte5,5,carnet);
+            jdReporte5.repaint();
+            abrirDialogo(jdReporte5, "Libros prestados a un estudiante");
+            tblReporte5.requestFocus();
+        }else {
+            mostrarError("El estudiante no existe en el sistema");
+        }
+    }//GEN-LAST:event_itmReporte5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1163,6 +1213,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JDialog jdAddEstudiante;
     private javax.swing.JDialog jdAddLibro;
     private javax.swing.JDialog jdAddPrestamo;
@@ -1170,7 +1221,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JDialog jdListEstudiantes;
     private javax.swing.JDialog jdListLibros;
     private javax.swing.JDialog jdReporte1and2;
-    private javax.swing.JDialog jdReporte4and5;
+    private javax.swing.JDialog jdReporte4;
+    private javax.swing.JDialog jdReporte5;
     private javax.swing.JLabel lblErrorDev;
     private javax.swing.JLabel lblErrorE;
     private javax.swing.JLabel lblErrorL;
@@ -1182,7 +1234,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTable tblListEstudiantes;
     private javax.swing.JTable tblListLibros;
     private javax.swing.JTable tblReporte1;
-    private javax.swing.JTable tblReporte4and5;
+    private javax.swing.JTable tblReporte4;
+    private javax.swing.JTable tblReporte5;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtCarnetDev;
